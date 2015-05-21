@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,6 +14,7 @@ import cinema.models.Projection;
 import cinema.models.User;
 
 @Stateless
+@Default
 public class DatabaseUtils {
 	
 	private static User[] Users = {
@@ -31,7 +33,7 @@ public class DatabaseUtils {
 	
 	@PersistenceContext
 	private EntityManager em;
-	
+		
 	@EJB
 	private UserDAO userDAO;
 	
@@ -46,7 +48,7 @@ public class DatabaseUtils {
 	
 	private void deleteData(){
 		em.createQuery("DELETE FROM User").executeUpdate();
-		em.createQuery("DELETE FROM Pojection").executeUpdate();
+		em.createQuery("DELETE FROM Projection").executeUpdate();
 	}
 	
 	private void addTestUsers(){
