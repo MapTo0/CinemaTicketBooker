@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun May 24 01:51:05 MSK 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-014d-82f8-fe3c-00000b798078 
+on database directory memory:C:\Users\User\Desktop\CinemaTicketBooker\Server\cinema\library with class loader sun.misc.Launcher$AppClassLoader@6da21389 
+Loaded from file:/C:/Users/User/.m2/repository/org/apache/derby/derby/10.10.1.1/derby-10.10.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_79-b15
+user.dir=C:\Users\User\Desktop\CinemaTicketBooker\Server\cinema
+os.name=Windows 8.1
+os.arch=amd64
+os.version=6.3
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
