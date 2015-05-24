@@ -1,11 +1,20 @@
 package cinema.model;
 
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "USERS")
@@ -30,6 +39,9 @@ public class User implements Serializable {
 
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
+    
+    @OneToMany
+    Set<Projection> currentProjections = new HashSet<>();
 
    
     public User() {
@@ -115,15 +127,29 @@ public class User implements Serializable {
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+    
+    public Set<Projection> getCurrentProjections() {
+		return currentProjections;
+	}
 
-   
 
 
-    @Override
+	public void setCurrentProjections(Set<Projection> currentProjections) {
+		this.currentProjections = currentProjections;
+	}
+
+
+
+	@Override
 	public String toString() {
+		String add = "";
+		for(Projection projection : currentProjections){
+			add += currentProjections.toString();
+		}
+		
 		return "User [userName=" + userName + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", dateOfBirth=" + dateOfBirth + "]";
+				+ ", email=" + email + ", dateOfBirth=" + dateOfBirth + add + "]";
 	}
 
 

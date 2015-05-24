@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import cinema.dao.ProjectionDAO;
 import cinema.dao.UserDAO;
+import cinema.model.Projection;
 import cinema.model.User;
 
 public class DatabaseUtils {
@@ -18,6 +20,12 @@ public class DatabaseUtils {
                     new Date()),
             new User("Third User", "98411TA", "third.user@somemail.com", "3", "33",
                     new Date())};
+    
+    private static Projection[] PROJECTIONS = {
+    	new Projection("Film1", 12, 42, "16:00"),
+    	new Projection("Film2", 13, 5, "21:45"),
+    	new Projection("Film3", 12, 63, "23:30")
+    };
 
    
 
@@ -29,8 +37,9 @@ public class DatabaseUtils {
 
     public void addTestDataToDB() {
         EntityManager em = initEntityManager();
-        addTestUsers(em);
         
+        addTestProjections(em);
+        addTestUsers(em);
         closeEntityManager(em);
     }
 
@@ -46,9 +55,24 @@ public class DatabaseUtils {
 
     private void addTestUsers(EntityManager em) {
         UserDAO userDAO = new UserDAO(em);
-        for (User user : USERS) {
+       /* for (User user : USERS) {
             userDAO.addUser(user);
-        }
+        }*/
+        
+        User user = new User("alle3x", "123", "abv.bg", "A", "K", new Date());
+        userDAO.addUser(user);
+        userDAO.buyTicket("TestFilma", user);
+        System.out.println(user.getCurrentProjections().toString());
+    }
+    
+    private void addTestProjections(EntityManager em){
+    	ProjectionDAO projectionDAO = new ProjectionDAO(em);
+    	/*for(Projection projection : PROJECTIONS){
+    		projectionDAO.addProjection(projection);
+    	}*/
+    	
+    	Projection projection = new Projection("TestFilma", 12, 12, "11:11");
+    	projectionDAO.addProjection(projection);
     }
 
     

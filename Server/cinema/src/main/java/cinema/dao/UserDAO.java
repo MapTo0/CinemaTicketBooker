@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import cinema.model.Projection;
 import cinema.model.User;
 
 public class UserDAO {
@@ -46,6 +47,17 @@ public class UserDAO {
         TypedQuery<User> query = em.createQuery(txtQuery, User.class);
         query.setParameter("userName", userName);
         return queryUser(query);
+    }
+    
+    public void buyTicket(String movieTitle, User user){
+    	Projection foundProjection =  em.createNamedQuery("getProjectionByMovieTitle", Projection.class)
+				.setParameter("movieTitle", movieTitle).getSingleResult();
+    	if(foundProjection != null){
+    		System.out.println("Not null");
+       		user.getCurrentProjections().add(foundProjection);
+			int newFreeSpaces = foundProjection.getFreeSpaces() - 1;
+			foundProjection.setFreeSpaces(newFreeSpaces);
+    	}
     }
 
     private User queryUser(TypedQuery<User> query) {
