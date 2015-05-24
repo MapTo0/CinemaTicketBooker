@@ -138,13 +138,16 @@ public class User implements Serializable {
 		this.currentProjections = currentProjections;
 	}
 
+	public void addNewProjection(Projection projection){
+		this.currentProjections.add(projection);
+	}
 
 
 	@Override
 	public String toString() {
 		String add = "";
 		for(Projection projection : currentProjections){
-			add += currentProjections.toString();
+			add += projection.toString();
 		}
 		
 		return "User [userName=" + userName + ", password=" + password

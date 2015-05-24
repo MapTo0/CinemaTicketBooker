@@ -22,12 +22,13 @@ public class TestClass {
         
         userDAO = new UserDAO(em);
         projectionDAO = new ProjectionDAO(em);
-        
-        
-       
+                      
         Collection<User> booksOfUser = userDAO.getAllBooks();
         Collection<Projection> projections = projectionDAO.getAllProjections();
-        System.out.println(booksOfUser);
+        for(User user : booksOfUser){
+        	System.out.println(user.toString());
+        	
+        }
         System.out.println(projections);
         dbUtils.closeEntityManager(em);
   

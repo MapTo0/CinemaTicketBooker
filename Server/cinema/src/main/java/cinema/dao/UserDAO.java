@@ -53,10 +53,11 @@ public class UserDAO {
     	Projection foundProjection =  em.createNamedQuery("getProjectionByMovieTitle", Projection.class)
 				.setParameter("movieTitle", movieTitle).getSingleResult();
     	if(foundProjection != null){
-    		System.out.println("Not null");
-       		user.getCurrentProjections().add(foundProjection);
+    		em.getTransaction().begin();
+       		user.addNewProjection(foundProjection);
 			int newFreeSpaces = foundProjection.getFreeSpaces() - 1;
 			foundProjection.setFreeSpaces(newFreeSpaces);
+			em.getTransaction().commit();
     	}
     }
 

@@ -62,7 +62,6 @@ public class DatabaseUtils {
         User user = new User("alle3x", "123", "abv.bg", "A", "K", new Date());
         userDAO.addUser(user);
         userDAO.buyTicket("TestFilma", user);
-        System.out.println(user.getCurrentProjections().toString());
     }
     
     private void addTestProjections(EntityManager em){
