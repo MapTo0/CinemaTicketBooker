@@ -1,94 +1,87 @@
 package cinema.model;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 @Entity
+@XmlRootElement
 @Table(name = "USERS")
-@NamedQueries({ @NamedQuery(name = "getAllUsers", query = "SELECT u FROM User u") })
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+    private static final long serialVersionUID = -7196507424378163030L;
 
-	private String userName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	private String password;
+    private String userName;
 
-	private String firstName;
+    private String password;
 
-	private String lastName;
+    private String email;
+    
+    private String firstName;
+   
+    private String lastName;
 
-	private String email;
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
 
-	@Temporal(TemporalType.DATE)
-	private Date dateOfBirth;
+    @OneToMany
+    private Set<Projection> currentProjections = new HashSet<>();
 
-	@OneToMany
-	Set<Projection> currentProjections = new HashSet<>();
+    public User() {
+    }
 
-	public User() {
-	}
+    public User(String userName, String password, String email, String firstName, String lastName, Date dateOfBirth) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+    }
 
-	public User(String userName, String password, String firstName,
-			String lastName, String email, Date dateOfBirth) {
-		super();
-		this.userName = userName;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.dateOfBirth = dateOfBirth;
-	}
+    public Long getId() {
+        return this.id;
+    }
 
-	public Long getId() {
-		return this.id;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	public void setId(final Long id) {
-		this.id = id;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getFirstName() {
+    public String getFirstName() {
 		return firstName;
 	}
 
@@ -105,60 +98,55 @@ public class User implements Serializable {
 	}
 
 	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
+        return dateOfBirth;
+    }
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
-	public Set<Projection> getCurrentProjections() {
-		return currentProjections;
-	}
+    @Override
+    public String toString() {
+        String result = getClass().getSimpleName() + " ";
+        if (userName != null && !userName.trim().isEmpty())
+            result += "userName: " + userName;
+        if (password != null && !password.trim().isEmpty())
+            result += ", password: " + password;
+        if (email != null && !email.trim().isEmpty())
+            result += ", email: " + email;
+        return result;
+    }
 
-	public void setCurrentProjections(Set<Projection> currentProjections) {
-		this.currentProjections = currentProjections;
-	}
+    public Set<Projection> getCurrentProjections() {
+        return this.currentProjections;
+    }
 
-	public void addNewProjection(Projection projection) {
-		this.currentProjections.add(projection);
-	}
+    public void setCurrentProjections(final Set<Projection> currentProjections) {
+        this.currentProjections = currentProjections;
+    }
 
-	@Override
-	public String toString() {
-		String add = "";
-		for (Projection projection : currentProjections) {
-			add += projection.toString();
-		}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof User)) {
+            return false;
+        }
+        User other = (User) obj;
+        if (id != null) {
+            if (!id.equals(other.id)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-		return "User [userName=" + userName + ", password=" + password
-				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", dateOfBirth=" + dateOfBirth + add
-				+ "]";
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof User)) {
-			return false;
-		}
-		User other = (User) obj;
-		if (id != null) {
-			if (!id.equals(other.id)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
 }

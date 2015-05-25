@@ -2,67 +2,60 @@ package cinema.utils;
 
 import java.util.Date;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import cinema.dao.ProjectionDAO;
 import cinema.dao.UserDAO;
 import cinema.model.Projection;
 import cinema.model.User;
 
+@Stateless
 public class DatabaseUtils {
-	private static final String CINEMA_PERSISTENCE_UNIT = "cinema-persistence-unit";
-	private static User[] USERS = {
-			new User("First User", "123456", "first.user@somemail.com", "1",
-					"11", new Date()),
-			new User("Second User", "Test1234", "second.user@somemail.com",
-					"2", "22", new Date()),
-			new User("Third User", "98411TA", "third.user@somemail.com", "3",
-					"33", new Date()) };
+    
+    private static User[] USERS = {
+            new User("First User", "123456", "first.user@somemail.com", "A", "AA",
+                    new Date()),
+            new User("Second User", "Test1234", "second.user@somemail.com", "B", "BB",
+                    new Date()),
+            new User("Third User", "98411TA", "third.user@somemail.com", "C", "CC",
+                    new Date())};
 
-	private static Projection[] PROJECTIONS = {
-			new Projection("Film1", 12, 42, "16:00"),
-			new Projection("Film2", 13, 5, "21:45"),
-			new Projection("Film3", 12, 63, "23:30") };
+    private static Projection[] PROJECTIONS = {
+            new Projection("Film1", 12,12),
+            new Projection("Film2", 124,215)};
 
-	private EntityManagerFactory emf;
+    @PersistenceContext
+    private EntityManager em;
 
-	public DatabaseUtils() {
-		emf = Persistence.createEntityManagerFactory(CINEMA_PERSISTENCE_UNIT);
-	}
+    @EJB
+    private ProjectionDAO projectionDAO;
+    
+    @EJB
+    private UserDAO userDAO;
+    
+    public void addTestDataToDB() {
+        deleteData();
+        addTestUsers();
+        addTestProjections();
+    }
 
-	public void addTestDataToDB() {
-		EntityManager em = initEntityManager();
+    private void deleteData() {
+        em.createQuery("DELETE FROM Projection").executeUpdate();
+        em.createQuery("DELETE FROM User").executeUpdate();
+   }
 
-		addTestProjections(em);
-		addTestUsers(em);
-		closeEntityManager(em);
-	}
+    private void addTestUsers() {
+        for (User user : USERS) {
+            userDAO.addUser(user);
+        }
+    }
 
-	public EntityManager initEntityManager() {
-		return emf.createEntityManager();
-	}
-
-	public void closeEntityManager(EntityManager em) {
-		if (em.isOpen()) {
-			em.close();
-		}
-	}
-
-	private void addTestUsers(EntityManager em) {
-		UserDAO userDAO = new UserDAO(em);
-		for (User user : USERS) {
-			userDAO.addUser(user);
-		}
-	}
-
-	private void addTestProjections(EntityManager em) {
-		ProjectionDAO projectionDAO = new ProjectionDAO(em);
-		for (Projection projection : PROJECTIONS) {
-			projectionDAO.addProjection(projection);
-		}
-
-	}
-
+    private void addTestProjections() {
+        for (Projection projection : PROJECTIONS) {
+            projectionDAO.addProjection(projection);
+        }
+    }
 }
