@@ -23,7 +23,7 @@ public class TestClass {
         userDAO = new UserDAO(em);
         projectionDAO = new ProjectionDAO(em);
                       
-        Collection<User> booksOfUser = userDAO.getAllBooks();
+        Collection<User> booksOfUser = userDAO.getAllUsers();
         Collection<Projection> projections = projectionDAO.getAllProjections();
         for(User user : booksOfUser){
         	System.out.println(user.toString());

@@ -13,33 +13,34 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PROJECTIONS")
 @NamedQueries({
-	@NamedQuery(name = "getAllProjections", query = "SELECT p FROM Projection p"),
-	@NamedQuery(name = "getProjectionByMovieTitle", query = "SELECT p FROM Projection p WHERE p.movieTitle=:movieTitle")})
-public class Projection implements Serializable{
+		@NamedQuery(name = "getAllProjections", query = "SELECT p FROM Projection p"),
+		@NamedQuery(name = "getProjectionByMovieTitle", query = "SELECT p FROM Projection p WHERE p.movieTitle=:movieTitle") })
+public class Projection implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5375291637351412248L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String movieTitle;
-	
+
 	private int hallNumber;
-	
+
 	private int freeSpaces;
-	
-	//Not String
+
+	// Not String
 	private String startHour;
-	
-	public Projection(){
-		
+
+	public Projection() {
+
 	}
 
-	public Projection(String movieTitle, int hallNumber, int freeSpaces, String startHour) {
+	public Projection(String movieTitle, int hallNumber, int freeSpaces,
+			String startHour) {
 		super();
 		this.movieTitle = movieTitle;
 		this.hallNumber = hallNumber;
@@ -93,9 +94,5 @@ public class Projection implements Serializable{
 				+ hallNumber + ", freeSpaces=" + freeSpaces + ", startHour="
 				+ startHour + "]";
 	}
-
-	
-	
-	
 
 }
