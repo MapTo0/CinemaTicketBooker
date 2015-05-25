@@ -11,6 +11,9 @@ import java.util.Set;
 @Entity
 @XmlRootElement
 @Table(name = "USERS")
+@NamedQueries({
+    
+    @NamedQuery(name = "getAllUsers", query = "SELECT u FROM User u")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = -7196507424378163030L;

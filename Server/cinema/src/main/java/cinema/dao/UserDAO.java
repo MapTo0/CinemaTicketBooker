@@ -1,12 +1,14 @@
 package cinema.dao;
 
 import java.security.MessageDigest;
+import java.util.Collection;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import cinema.model.Projection;
 import cinema.model.User;
 
 @Singleton
@@ -33,6 +35,10 @@ public class UserDAO {
         TypedQuery<User> query = em.createQuery(txtQuery, User.class);
         query.setParameter("userName", userName);
         return queryUser(query);
+    }
+    
+    public Collection<User> getAllUsers() {
+        return em.createNamedQuery("getAllUsers", User.class).getResultList();
     }
 
     private User queryUser(TypedQuery<User> query) {
