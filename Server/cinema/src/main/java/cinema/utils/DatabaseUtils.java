@@ -16,11 +16,11 @@ import cinema.model.User;
 public class DatabaseUtils {
     
     private static User[] USERS = {
-            new User("First User", "123456", "first.user@somemail.com", "A", "AA",
+            new User("First User", "123456", "first.user@somemail.com", "A", "AA", "088888888",
                     new Date()),
-            new User("Second User", "Test1234", "second.user@somemail.com", "B", "BB",
+            new User("Second User", "Test1234", "second.user@somemail.com", "B", "BB", "099999999",
                     new Date()),
-            new User("Third User", "98411TA", "third.user@somemail.com", "C", "CC",
+            new User("Third User", "98411TA", "third.user@somemail.com", "C", "CC", "00000000000",
                     new Date())};
 
     private static Projection[] PROJECTIONS = {

@@ -31,6 +31,8 @@ public class User implements Serializable {
     private String firstName;
    
     private String lastName;
+    
+    private String phoneNumber;
 
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
@@ -41,12 +43,13 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String userName, String password, String email, String firstName, String lastName, Date dateOfBirth) {
+    public User(String userName, String password, String email, String firstName, String lastName, String phoneNumber, Date dateOfBirth) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -98,6 +101,16 @@ public class User implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public Date getDateOfBirth() {
