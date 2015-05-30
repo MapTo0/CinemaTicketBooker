@@ -9,6 +9,32 @@
     <link rel="stylesheet" href="css/component.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+    $.ajax({
+        url : 'cinema/rest/projection',
+        type : "GET",
+        dataType : "json",
+        success : function(data, textStatus, jqXHR) {
+            drawTable(data);
+        }
+    });
+
+    function drawTable(data) {
+        for (var i = 0; i < data.length; i++) {
+            drawRow(data[i]);
+        }
+    }
+
+    function drawRow(rowData) {
+        var row = $("<tr />")
+        $("#projection_table").append(row);
+        row.append($("<td>" + rowData.movieTitle + "</td>"));
+        row.append($("<td>" + rowData.hallNumber + "</td>"));
+        row.append($("<td>" + rowData.freePlaces + "</td>"));
+        row.append($("<td>" + rowData.startTime + "</td>"));
+    }
+</script>
+    
 </head>
 
 <body>
@@ -22,6 +48,18 @@
         <a href="login.html">Login</a>
         <a href="#">Register</a>
      </form>
+     
+     <div>
+		<table id="projection_table" class="table">
+			<tr>
+				<th>Title</th>
+				<th>Hall</th>
+				<th>Places</th>
+				<th>Time</th>
+			</tr>
+		</table>
+	</div>
+     
     </main>
     <footer>
         <ul>
