@@ -24,8 +24,8 @@ public class DatabaseUtils {
                     new Date())};
 
     private static Projection[] PROJECTIONS = {
-            new Projection("Film1", 12,12),
-            new Projection("Film2", 124,215)};
+            new Projection("Film1", 12,12, "16:00"),
+            new Projection("Film2", 124,215, "19:00")};
 
     @PersistenceContext
     private EntityManager em;

@@ -28,17 +28,21 @@ public class Projection implements Serializable {
     private int hallNumber;
     
     private int freePlaces;
+    
+    //TODO change var type
+    private String startTime;
 
     public Projection() {
     }
 
     
 
-    public Projection(String movieTitle, int hallNumber, int freePlaces) {
+    public Projection(String movieTitle, int hallNumber, int freePlaces, String startTime) {
 		super();
 		this.movieTitle = movieTitle;
 		this.hallNumber = hallNumber;
 		this.freePlaces = freePlaces;
+		this.startTime = startTime;
 	}
 
 
@@ -85,6 +89,17 @@ public class Projection implements Serializable {
 
 	public void setFreePlaces(int freePlaces) {
 		this.freePlaces = freePlaces;
+	}
+	
+	
+	public String getStartTime() {
+		return startTime;
+	}
+
+
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 
 
