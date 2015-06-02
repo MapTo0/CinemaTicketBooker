@@ -1,3 +1,50 @@
-body {
-	background-color: skyblue;
+body,
+html {
+    height: 100%;
+}
+
+#header {
+    height: 35%;
+    background-color: skyblue;
+    clear: both;
+}
+
+#main {
+    height: 50%;
+    background-color: grey;
+}
+
+#footer {
+    height: 15%;
+}
+
+#login-form {
+    width: 50%;
+    height: 100%;
+    float: right;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column;
+    padding: 20px 20px 0px 20px;
+}
+
+#login-form label {
+	color: white;
+	font-weight: bold;
+	font-size: 3rem;
+	text-align: center;
+}
+
+#login-form input {
+	height: 40px;
+	border-radius: 5px;
+	border: 1px solid grey;
+}
+
+#login-form button {
+	height: 40px;
+	margin-top: 30px;
 }
