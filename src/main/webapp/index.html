@@ -15,16 +15,11 @@
         type : "GET",
         dataType : "json",
         success : function(data, textStatus, jqXHR) {
+        	debugger;
             drawTable(data);
         }
     });
-
-    function drawTable(data) {
-        for (var i = 0; i < data.length; i++) {
-            drawRow(data[i]);
-        }
-    }
-
+    
     function drawRow(rowData) {
         var row = $("<tr />")
         $("#projection_table").append(row);
@@ -32,6 +27,12 @@
         row.append($("<td>" + rowData.hallNumber + "</td>"));
         row.append($("<td>" + rowData.freePlaces + "</td>"));
         row.append($("<td>" + rowData.startTime + "</td>"));
+    }
+
+    function drawTable(data) {
+        for (var i = 0; i < data.projection.length; i++) {
+            drawRow(data.projection[i]);
+        }
     }
 </script>
     
