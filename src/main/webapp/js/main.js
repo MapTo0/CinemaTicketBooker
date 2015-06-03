@@ -13,7 +13,7 @@ $(document).ready(function() {
         $.ajax({
             url: 'rest/user/login',
             type: "POST",
-            contentType: "application/json;charset=UTF-8",
+            contentType: "application/json",
             data: JSON.stringify(oUserData),
             statusCode: {
                 401: function() {
@@ -37,7 +37,7 @@ $(document).ready(function() {
         $.ajax({
                 url: 'rest/user/register',
                 type: "POST",
-                contentType: "application/json;charset=UTF-8",
+                contentType: "application/json",
                 data: JSON.stringify(oRegisterData)
             })
             .success(function(data) {

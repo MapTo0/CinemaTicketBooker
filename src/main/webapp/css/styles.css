@@ -3,15 +3,41 @@ html {
     height: 100%;
 }
 
+h1,
+h2 {
+    font-family: cursive;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 #header {
-    height: 35%;
-    background-color: skyblue;
+    height: 10%;
+    background-color: black;
     clear: both;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header h1 {
+    color: white;
+    text-align: center;
+    align-self: center;
+}
+
+#header div {
+    width: 30%;
 }
 
 #main {
     height: 50%;
-    background-color: grey;
+    background-color: #EDF0F5;
 }
 
 #footer {
@@ -19,32 +45,115 @@ html {
 }
 
 #login-form {
-    width: 50%;
+    width: 35%;
     height: 100%;
-    float: right;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-    -webkit-flex-flow: column;
-    padding: 20px 20px 0px 20px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 #login-form label {
-	color: white;
-	font-weight: bold;
-	font-size: 3rem;
-	text-align: center;
+    color: white;
+    font-size: 1rem;
 }
 
 #login-form input {
-	height: 40px;
-	border-radius: 5px;
-	border: 1px solid grey;
+    height: 20px;
+    width: 140px;
+    border-radius: 5px;
+    border: 1px solid grey;
 }
 
 #login-form button {
-	height: 40px;
-	margin-top: 30px;
+    height: 25px;
+    margin-top: 20px;
+    background-color: #5B74A8;
+    border: 1px solid #2F477A;
+    outline: #8A9CC2;
+    border-radius: 5px;
+    color: white;
+}
+
+#login-form div {
+    display: flex;
+    flex-direction: column;
+}
+
+#main {
+    display: flex;
+    flex-direction: row;
+}
+
+#main section {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}
+
+#main section h2 {
+    height: 10%;
+    display: flex;
+}
+
+#register-form {
+    display: flex;
+    height: 60%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+#register-form input {
+    width: 45%;
+    height: 30px;
+    padding-left: 15px;
+}
+
+#register-form div {
+    width: 100%;
+}
+
+#register-form button {
+    width: 90%;
+    height: 35px;
+    border: 1px solid grey;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+section img {
+    width: 120px;
+    height: 90px;
+}
+
+section span {
+    font-size: 2rem;
+}
+
+section ul {
+    height: 100%;
+    margin-left: 10%;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+}
+
+section ul li {
+    align-self: baseline;
+    display: flex;
+}
+
+section ul li span {
+    align-self: center;
+}
+
+section ul li img {
+    margin-right: 20px;
 }

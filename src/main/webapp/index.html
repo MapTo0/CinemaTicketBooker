@@ -13,26 +13,46 @@
 
 <body>
     <header id="header">
-        <img src="#" alt="LOGO">
+        <div>
+            <h1>Cinema ticket booker</h1>
+        </div>
         <form method="post" role="form" accept-charset="utf-8" id="login-form">
-            <label>Email</label>
-            <input type="email" name="mail" id="login-email">
-            <label>Password</label>
-            <input type="password" name="pass" id="login-password">
+            <div>
+                <label>Email</label>
+                <input type="email" name="mail" id="login-email">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="pass" id="login-password">
+            </div>
             <button type="submit" id="login-button">Login</button>
         </form>
-        
-        	<a href="login.html"> Test</a>
     </header>
     <main id="main">
         <section>
-            Left Content
+            <ul>
+                <li>
+                    <img src="images/movie.png" alt="some alt">
+                    <span>Check latest movies</span>
+                </li>
+                <li>
+                    <img src="images/ticket.png" alt="some alt">
+                    <span>Buy a ticket</span>
+                </li>
+                <li>
+                    <img src="images/money.png" alt="some alt">
+                    <span>Save money</span>
+                </li>
+            </ul>
         </section>
         <section>
             <h2>Sign Up</h2>
-            <form action="register" method="post" role="form" accept-charset="utf-8" id="register-form">
-                <input name="firstName" placeholder="First name" id="register-firstName">
-                <input name="lastName" placeholder="Last name" id="register-lastName">
+            <form method="post" role="form" accept-charset="utf-8" id="register-form">
+                <div>
+                    <input name="firstName" placeholder="First name" id="register-firstName">
+                    <input name="lastName" placeholder="Last name" id="register-lastName">
+                </div>
+                <input type="email" name="email" placeholder="Email" id="register-email">
                 <input type="email" name="email" placeholder="Email" id="register-email">
                 <input type="password" name="password" placeholder="Password" id="register-password">
                 <button type="submit" id="register-button">Sign Up</button>
