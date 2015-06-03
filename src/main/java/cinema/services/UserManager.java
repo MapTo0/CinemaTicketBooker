@@ -26,6 +26,7 @@ public class UserManager {
     @Inject
     private UserContext context;
     
+    @Path("register")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerUser(User newUser) {
