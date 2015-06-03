@@ -2,99 +2,71 @@
 <html>
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Cinema Ticket Booker</title>
-<link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/styles.css">
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="js/main.js"></script>
-<script type="text/javascript">
-	function login() {
-		var email = $("#login-email")[0].value;
-		var password = $("#login-password")[0].value;
-
-		var data = {
-			user : {
-				email : email,
-				password : password
-			}
-		}
-
-		$.ajax({
-			url : 'rest/user/login',
-			type : "POST",
-			contentType : "application/json;charset=UTF-8",
-			data : JSON.stringify(data),
-			statusCode : {
-				401 : function() {
-					alert("Authentication failed");
-					$("#reset_login").trigger("click");
-				},
-				200 : function() {
-					alert("Authentication fine")
-					window.location.replace("test.html");
-				}
-			}
-		});
-	}
-</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cinema Ticket Booker</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/main.js"></script>
 </head>
 
 <body>
-	<header id="header">
-		<div>
-			<h1>Cinema ticket booker</h1>
-		</div>
-		<form method="post" role="form" accept-charset="utf-8" id="login-form">
-			<div>
-				<label>Email</label> <input type="email" name="mail"
-					id="login-email">
-			</div>
-			<div>
-				<label>Password</label> <input type="password" name="pass"
-					id="login-password">
-			</div>
-			<button type="button" onclick="login()" class="btn btn-default">Login</button>
-		</form>
-	</header>
-	<main id="main">
-	<section>
-		<ul>
-			<li><img src="images/movie.png" alt="some alt"> <span>Check
-					latest movies</span></li>
-			<li><img src="images/ticket.png" alt="some alt"> <span>Buy
-					a ticket</span></li>
-			<li><img src="images/money.png" alt="some alt"> <span>Save
-					money</span></li>
-		</ul>
-	</section>
-	<section>
-		<h2>Sign Up</h2>
-		<form method="post" role="form" accept-charset="utf-8"
-			id="register-form">
-			<div>
-				<input name="firstName" placeholder="First name"
-					id="register-firstName"> <input name="lastName"
-					placeholder="Last name" id="register-lastName">
-			</div>
-			<input type="email" name="email" placeholder="Email"
-				id="register-email"> <input type="email" name="email"
-				placeholder="Email" id="register-email"> <input
-				type="password" name="password" placeholder="Password"
-				id="register-password">
-			<button type="submit" id="register-button">Sign Up</button>
-		</form>
-	</section>
-	</main>
-	<footer id="footer">
-		<ul>
-			<li>About us</li>
-			<li>Contacts</li>
-			<li>Example li</li>
-			<li>Example li</li>
-		</ul>
-	</footer>
+    <header id="header">
+        <div>
+            <h1>Cinema ticket booker</h1>
+        </div>
+        <form method="post" role="form" accept-charset="utf-8" id="login-form">
+            <div>
+                <label>Email</label>
+                <input type="email" name="mail" id="login-email">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="pass" id="login-password">
+            </div>
+            <button type="submit" id="login-button">Login</button>
+        </form>
+    </header>
+    <main id="main">
+        <section>
+            <ul>
+                <li>
+                    <img src="images/movie.png" alt="some alt">
+                    <span>Check latest movies</span>
+                </li>
+                <li>
+                    <img src="images/ticket.png" alt="some alt">
+                    <span>Buy a ticket</span>
+                </li>
+                <li>
+                    <img src="images/money.png" alt="some alt">
+                    <span>Save money</span>
+                </li>
+            </ul>
+        </section>
+        <section id="register-section">
+            <h1>No account? Register!</h1>
+            <form method="post" role="form" accept-charset="utf-8" id="register-form">
+                <div>
+                    <input name="firstName" placeholder="First name" id="register-firstName">
+                    <input name="lastName" placeholder="Last name" id="register-lastName">
+                </div>
+                <input type="email" name="email" placeholder="Email" id="register-email">
+                <input type="email" name="email" placeholder="Re-enter email" id="register-email">
+                <input type="password" name="password" placeholder="Password" id="register-password">
+                <button type="submit" id="register-button">Sign Up</button>
+            </form>
+        </section>
+    </main>
+    <footer id="footer">
+        <ul>
+            <li>About us</li>
+            <li>Contacts</li>
+            <li>Example li</li>
+            <li>Example li</li>
+        </ul>
+    </footer>
 </body>
 
 </html>
