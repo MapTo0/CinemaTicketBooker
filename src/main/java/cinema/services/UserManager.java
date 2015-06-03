@@ -37,7 +37,7 @@ public class UserManager {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response loginUser(User user){
-    	boolean isUserValid = userDAO.validateUserCredentials(user.getUserName(), user.getPassword());
+    	boolean isUserValid = userDAO.validateUserCredentials(user.getEmail(), user.getPassword());
     	if(!isUserValid) {
     		return Response.status(HttpURLConnection.HTTP_UNAUTHORIZED).build();
     	}
@@ -62,7 +62,7 @@ public class UserManager {
     	if(context.getCurrentUser() == null){
     		return null;
     	}
-    	return context.getCurrentUser().getUserName();
+    	return context.getCurrentUser().getEmail();
     }
     
     @Path("logout")

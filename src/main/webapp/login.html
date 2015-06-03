@@ -6,13 +6,13 @@
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 function login() {
-    var username = $("#userName")[0].value;
+    var email = $("#email")[0].value;
     var password = $("#pwd")[0].value;
     
     
     
     var data = { user : {
-	            userName : username,
+	            email : email,
 	            password : password
 			}
     }
@@ -43,8 +43,8 @@ function login() {
 
 	<form id="login_form" role="form" method="post">
 		<div class="form-group">
-			<label for="userName">Username:</label> <input type="text"
-				class="form-control" name="username" id="userName" value="">
+			<label for="email">Email:</label> <input type="text"
+				class="form-control" name="email" id="email" value="">
 		</div>
 		<div class="form-group">
 			<label for="pwd">Password:</label> <input type="password"

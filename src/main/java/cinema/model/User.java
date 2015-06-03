@@ -21,36 +21,26 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String userName;
+    
+    private String email;
 
     private String password;
 
-    private String email;
-    
     private String firstName;
    
     private String lastName;
     
-    private String phoneNumber;
-
-    @Temporal(TemporalType.DATE)
-    private Date dateOfBirth;
-
     @OneToMany
     private Set<Projection> currentProjections = new HashSet<>();
 
     public User() {
     }
 
-    public User(String userName, String password, String email, String firstName, String lastName, String phoneNumber, Date dateOfBirth) {
-        this.userName = userName;
+    public User(String email, String password, String firstName, String lastName) {
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.dateOfBirth = dateOfBirth;
     }
 
     public Long getId() {
@@ -59,14 +49,6 @@ public class User implements Serializable {
 
     public void setId(final Long id) {
         this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getPassword() {
@@ -85,8 +67,6 @@ public class User implements Serializable {
         this.email = email;
     }
     
-    
-
     public String getFirstName() {
 		return firstName;
 	}
@@ -102,34 +82,18 @@ public class User implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 
     @Override
     public String toString() {
         String result = getClass().getSimpleName() + " ";
-        if (userName != null && !userName.trim().isEmpty())
-            result += "userName: " + userName;
+        if (email != null && !email.trim().isEmpty())
+            result += "email: " + email;
         if (password != null && !password.trim().isEmpty())
             result += ", password: " + password;
-        if (email != null && !email.trim().isEmpty())
-            result += ", email: " + email;
+        if (firstName != null && !firstName.trim().isEmpty())
+            result += ", firstName: " + firstName;
+        if (lastName != null && !lastName.trim().isEmpty())
+        	result += ", lastName: " + lastName;
         return result;
     }
 

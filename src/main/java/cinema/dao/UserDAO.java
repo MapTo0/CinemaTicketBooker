@@ -22,11 +22,11 @@ public class UserDAO {
         em.persist(user);
     }
 
-    public boolean validateUserCredentials(String userName, String password) {
-        String txtQuery = "SELECT u FROM User u WHERE u.userName=:userName AND u.password=:password";
+    public boolean validateUserCredentials(String email, String password) {
+        String txtQuery = "SELECT u FROM User u WHERE u.email=:email AND u.password=:password";
         TypedQuery<User> query = em.createQuery(txtQuery, User.class);
-        System.out.println(userName + " " + password);
-        query.setParameter("userName", userName);
+        System.out.println(email + " " + password);
+        query.setParameter("email", email);
         query.setParameter("password", getHashedPassword(password));
         return queryUser(query) != null;
     }
