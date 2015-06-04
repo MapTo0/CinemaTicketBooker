@@ -2,25 +2,23 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cinema Ticket Booker</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/main.js"></script>
-    <script type="text/javascript">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Cinema Ticket Booker</title>
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript">
 	function login() {
 		var email = $("#login-email")[0].value;
 		var password = $("#login-password")[0].value;
-
 		var data = {
 			user : {
 				email : email,
 				password : password
 			}
 		}
-
 		$.ajax({
 			url : 'rest/user/login',
 			type : "POST",
@@ -42,23 +40,23 @@
 </head>
 
 <body>
-    <header id="header">
-        <div>
-            <h1>Cinema ticket booker</h1>
-        </div>
-        <form method="post" role="form" accept-charset="utf-8" id="login-form">
-            <div>
-                <label>Email</label>
-                <input type="email" name="mail" id="login-email">
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" name="pass" id="login-password">
-            </div>
-            <button type="submit" onclick="login()" id="login-button">Login</button>
-        </form>
-    </header>
-    <main id="main">
+	<header id="header">
+		<div>
+			<h1>Cinema ticket booker</h1>
+		</div>
+		<form method="post" role="form" accept-charset="utf-8" id="login-form">
+			<div>
+				<label>Email</label> <input type="email" name="mail"
+					id="login-email">
+			</div>
+			<div>
+				<label>Password</label> <input type="password" name="pass"
+					id="login-password">
+			</div>
+			<button type="button" onclick="login()" class="btn btn-default">Login</button>
+		</form>
+	</header>
+	<main id="main">
         <section>
             <ul>
                 <li>
@@ -89,14 +87,14 @@
             </form>
         </section>
     </main>
-    <footer id="footer">
-        <ul>
-            <li>About us</li>
-            <li>Contacts</li>
-            <li>Example li</li>
-            <li>Example li</li>
-        </ul>
-    </footer>
+	<footer id="footer">
+		<ul>
+			<li>About us</li>
+			<li>Contacts</li>
+			<li>Example li</li>
+			<li>Example li</li>
+		</ul>
+	</footer>
 </body>
 
 </html>
