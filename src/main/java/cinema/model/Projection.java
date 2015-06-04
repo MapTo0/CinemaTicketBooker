@@ -31,21 +31,20 @@ public class Projection implements Serializable {
     
     //TODO change var type
     private String startTime;
+    
+    private String posterUrl;
 
     public Projection() {
     }
 
-    
-
-    public Projection(String movieTitle, int hallNumber, int freePlaces, String startTime) {
+    public Projection(String movieTitle, int hallNumber, int freePlaces, String startTime, String posterUrl) {
 		super();
 		this.movieTitle = movieTitle;
 		this.hallNumber = hallNumber;
 		this.freePlaces = freePlaces;
 		this.startTime = startTime;
+		this.posterUrl = posterUrl;
 	}
-
-
 
 	public Long getId() {
         return this.id;
@@ -55,54 +54,45 @@ public class Projection implements Serializable {
         this.id = id;
     }
 
-    
-
     public String getMovieTitle() {
 		return movieTitle;
 	}
-
-
 
 	public void setMovieTitle(String movieTitle) {
 		this.movieTitle = movieTitle;
 	}
 
-
-
 	public int getHallNumber() {
 		return hallNumber;
 	}
-
-
 
 	public void setHallNumber(int hallNumber) {
 		this.hallNumber = hallNumber;
 	}
 
-
-
 	public int getFreePlaces() {
 		return freePlaces;
 	}
-
-
 
 	public void setFreePlaces(int freePlaces) {
 		this.freePlaces = freePlaces;
 	}
 	
-	
 	public String getStartTime() {
 		return startTime;
 	}
 
-
-
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
+		
+	public String getPosterUrl() {
+		return posterUrl;
+	}
 
-
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
+	}
 
 	@Override
     public String toString() {
