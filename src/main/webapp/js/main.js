@@ -4,7 +4,7 @@ $(document).ready(function() {
         oUserData = null,
         oRegisterData = null;
 
-    $LoginButton.click(function() {
+    $LoginButton.on("click", function() {
         oUserData = {
             user: {
                 email: $("#login-email").val(),
@@ -30,10 +30,12 @@ $(document).ready(function() {
 
     $RegisterButton.click(function() {
         oRegisterData = {
-            user: $("#register-email").val(),
-            firstName: $("#register-firstName").val(),
-            lastName: $("#register-lastName").val(),
-            password: $("#register-password").val()
+            user: {
+                user: $("#register-email").val(),
+                firstName: $("#register-firstName").val(),
+                lastName: $("#register-lastName").val(),
+                password: $("#register-password").val()
+            }
         };
 
         $.ajax({
