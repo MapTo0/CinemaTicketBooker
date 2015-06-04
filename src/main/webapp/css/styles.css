@@ -64,6 +64,7 @@ ul {
     border-radius: 5px;
     border: 1px solid grey;
     margin-right: 10px;
+    padding-left: 10px;
 }
 
 #login-form button {
@@ -166,4 +167,18 @@ section ul li span {
 
 section ul li img {
     margin-right: 20px;
+}
+
+#footer {
+    display: flex;
+    height: 40%;
+    justify-content: center;
+}
+
+#footer li {
+    display: inline;
+}
+
+#footer img {
+    width: 24%;
 }
