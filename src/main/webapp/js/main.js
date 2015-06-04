@@ -6,8 +6,10 @@ $(document).ready(function() {
 
     $LoginButton.click(function() {
         oUserData = {
-            user: $("#login-email").val(),
-            password: $("#login-password").val()
+            user: {
+                email: $("#login-email").val(),
+                password: $("#login-password").val()
+            }
         };
 
         $.ajax({
