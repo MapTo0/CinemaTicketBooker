@@ -9,6 +9,36 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/main.js"></script>
+    <script type="text/javascript">
+	function login() {
+		var email = $("#login-email")[0].value;
+		var password = $("#login-password")[0].value;
+
+		var data = {
+			user : {
+				email : email,
+				password : password
+			}
+		}
+
+		$.ajax({
+			url : 'rest/user/login',
+			type : "POST",
+			contentType : "application/json;charset=UTF-8",
+			data : JSON.stringify(data),
+			statusCode : {
+				401 : function() {
+					alert("Authentication failed");
+					$("#reset_login").trigger("click");
+				},
+				200 : function() {
+					alert("Authentication fine")
+					window.location.replace("index.html");
+				}
+			}
+		});
+	}
+</script>
 </head>
 
 <body>
@@ -25,7 +55,7 @@
                 <label>Password</label>
                 <input type="password" name="pass" id="login-password">
             </div>
-            <button type="submit" id="login-button">Login</button>
+            <button type="submit" onclick="login()" id="login-button">Login</button>
         </form>
     </header>
     <main id="main">
