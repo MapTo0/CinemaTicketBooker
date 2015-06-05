@@ -12,9 +12,7 @@ import java.io.Serializable;
 
 @Entity
 @XmlRootElement
-@NamedQueries({
-        
-        @NamedQuery(name = "getAllProjections", query = "SELECT b FROM Projection b")})
+@NamedQueries({@NamedQuery(name = "getAllProjections", query = "SELECT b FROM Projection b")})
 public class Projection implements Serializable {
 
     private static final long serialVersionUID = -2929008106626811914L;

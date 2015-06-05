@@ -1,12 +1,18 @@
 package cinema.model;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
@@ -82,6 +88,14 @@ public class User implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	public Set<Projection> getCurrentProjections() {
+        return this.currentProjections;
+    }
+
+    public void setCurrentProjections(final Set<Projection> currentProjections) {
+        this.currentProjections = currentProjections;
+    }
 
     @Override
     public String toString() {
@@ -95,14 +109,6 @@ public class User implements Serializable {
         if (lastName != null && !lastName.trim().isEmpty())
         	result += ", lastName: " + lastName;
         return result;
-    }
-
-    public Set<Projection> getCurrentProjections() {
-        return this.currentProjections;
-    }
-
-    public void setCurrentProjections(final Set<Projection> currentProjections) {
-        this.currentProjections = currentProjections;
     }
 
     @Override

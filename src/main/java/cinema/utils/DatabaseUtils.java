@@ -1,7 +1,5 @@
 package cinema.utils;
 
-import java.util.Date;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,7 +43,7 @@ public class DatabaseUtils {
     private void deleteData() {
         em.createQuery("DELETE FROM Projection").executeUpdate();
         em.createQuery("DELETE FROM User").executeUpdate();
-   }
+    }
 
     private void addTestUsers() {
         for (User user : USERS) {

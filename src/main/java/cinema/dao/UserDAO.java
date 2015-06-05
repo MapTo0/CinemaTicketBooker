@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import cinema.model.Projection;
 import cinema.model.User;
 
 @Singleton
@@ -18,6 +17,7 @@ public class UserDAO {
     private EntityManager em;
 
     public void addUser(User user) {
+    	System.out.println(user.getEmail() + " " + user.getPassword());
         user.setPassword(getHashedPassword(user.getPassword()));
         em.persist(user);
     }
@@ -31,10 +31,10 @@ public class UserDAO {
         return queryUser(query) != null;
     }
 
-    public User findUserByName(String userName) {
-        String txtQuery = "SELECT u FROM User u WHERE u.userName = :userName";
+    public User findUserByName(String email) {
+        String txtQuery = "SELECT u FROM User u WHERE u.email = :email";
         TypedQuery<User> query = em.createQuery(txtQuery, User.class);
-        query.setParameter("userName", userName);
+        query.setParameter("email", email);
         return queryUser(query);
     }
     
