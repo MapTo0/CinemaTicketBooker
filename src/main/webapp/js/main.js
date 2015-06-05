@@ -1,11 +1,10 @@
 $(document).ready(function() {
     var $LoginButton = $("#login-button"),
-        $RegisterButton = $("#register-button"),
-        oUserData = null,
-        oRegisterData = null;
+        $RegisterButton = $("#register-button");
 
     $LoginButton.on("click", function() {
-        oUserData = {
+        // TODO VALIDATION
+        var oUserData = {
             user: {
                 email: $("#login-email").val(),
                 password: $("#login-password").val()
@@ -20,18 +19,20 @@ $(document).ready(function() {
             statusCode: {
                 401: function() {
                     alert("Authentication failed");
+                    // TODO CLEAR
                 },
                 200: function() {
                     alert("Authentication is fine!");
+                    window.location.replace("home.html");
                 }
             }
         });
     });
 
     $RegisterButton.click(function() {
-        oRegisterData = {
+        var oRegisterData = {
             user: {
-                user: $("#register-email").val(),
+                email: $("#register-email").val(),
                 firstName: $("#register-firstName").val(),
                 lastName: $("#register-lastName").val(),
                 password: $("#register-password").val()
