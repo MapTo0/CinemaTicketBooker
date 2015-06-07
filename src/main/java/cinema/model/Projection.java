@@ -1,5 +1,11 @@
 package cinema.model;
 
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import java.io.Serializable;
 
 @Entity
 @XmlRootElement
@@ -26,6 +30,9 @@ public class Projection implements Serializable {
     private int hallNumber;
     
     private int freePlaces;
+       
+    @ElementCollection
+    private List<Boolean> places = new ArrayList<>();
     
     //TODO change var type
     private String startTime;
@@ -42,6 +49,7 @@ public class Projection implements Serializable {
 		this.freePlaces = freePlaces;
 		this.startTime = startTime;
 		this.posterUrl = posterUrl;
+		initPlaces(freePlaces);	
 	}
 
 	public Long getId() {
@@ -91,7 +99,18 @@ public class Projection implements Serializable {
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
 	}
+	
+	public List<Boolean> getPlaces(){
+		return this.places;
+	}
+	
+	public void initPlaces(int freePlaces){
+		for(int i = 0; i < freePlaces; i++){
+			this.places.add(true);
+		}
+	}
 
+	
 	@Override
     public String toString() {
         String result = getClass().getSimpleName() + " ";
