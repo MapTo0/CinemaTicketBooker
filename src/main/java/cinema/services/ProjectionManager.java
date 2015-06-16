@@ -29,13 +29,6 @@ public class ProjectionManager {
 	@Path("{projectionId}")
 	@Produces("application/json")
 	public String places(@PathParam("projectionId") String projectionId) {
-		Collection<Projection> projections = projectionDAO.getAllProjections();
-		System.out.println(projectionId);
-		for (Projection projection : projections) {
-			if (projection.getId().equals(Long.parseLong(projectionId))) {
-				return projection.getPlaces().toString();
-			}
-		}
-		return null;
+		return projectionDAO.findById(Long.parseLong(projectionId)).getPlaces().toString();
 	}
 }
