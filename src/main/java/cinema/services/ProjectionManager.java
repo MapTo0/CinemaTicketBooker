@@ -1,15 +1,13 @@
 package cinema.services;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import cinema.dao.ProjectionDAO;
 import cinema.model.Projection;
@@ -27,13 +25,14 @@ public class ProjectionManager {
 		return projectionDAO.getAllProjections();
 	}
 
-	@Path("places")
 	@GET
+	@Path("{projectionId}")
 	@Produces("application/json")
-	public String places(String movieTitle) {
+	public String places(@PathParam("projectionId") String projectionId) {
 		Collection<Projection> projections = projectionDAO.getAllProjections();
+		System.out.println(projectionId);
 		for (Projection projection : projections) {
-			if (projection.getMovieTitle().equals(movieTitle)) {
+			if (projection.getId().equals(Long.parseLong(projectionId))) {
 				return projection.getPlaces().toString();
 			}
 		}
