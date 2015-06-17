@@ -14,6 +14,7 @@ import cinema.model.User;
 @Singleton
 public class ProjectionDAO {
 
+	
 	@PersistenceContext
 	private EntityManager em;
 
@@ -41,9 +42,10 @@ public class ProjectionDAO {
 		}
 	}
 
-	public void buyTicket(Projection projection, User userWhoBuyTicket) {
+	public void buyTicket(Projection projection, User userWhoBuyTicket, int place) {
 		Projection foundProjection = findById(projection.getId());
 		int freePlaces = foundProjection.getFreePlaces() - 1;
+		foundProjection.getPlaces().add(place, false);
 		foundProjection.setFreePlaces(freePlaces);
 		userWhoBuyTicket.getCurrentProjections().add(foundProjection);
 	}
