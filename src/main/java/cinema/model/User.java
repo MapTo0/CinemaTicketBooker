@@ -18,62 +18,66 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Table(name = "USERS")
 @NamedQueries({
-    
-    @NamedQuery(name = "getAllUsers", query = "SELECT u FROM User u")})
+
+@NamedQuery(name = "getAllUsers", query = "SELECT u FROM User u") })
 public class User implements Serializable {
 
-    private static final long serialVersionUID = -7196507424378163030L;
+	private static final long serialVersionUID = -7196507424378163030L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    private String email;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    private String password;
+	private String email;
 
-    private String firstName;
-   
-    private String lastName;
-    
-    @OneToMany
-    private Set<Projection> currentProjections = new HashSet<>();
+	private String password;
 
-    public User() {
-    }
+	private String firstName;
 
-    public User(String email, String password, String firstName, String lastName) {
-        this.password = password;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+	private String lastName;
 
-    public Long getId() {
-        return this.id;
-    }
+	private boolean isCashier;
 
-    public void setId(final Long id) {
-        this.id = id;
-    }
+	@OneToMany
+	private Set<Projection> currentProjections = new HashSet<>();
 
-    public String getPassword() {
-        return password;
-    }
+	public User() {
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public User(String email, String password, String firstName,
+			String lastName, boolean isCashier) {
+		this.password = password;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.isCashier = isCashier;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-    public String getFirstName() {
+	public void setId(final Long id) {
+		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFirstName() {
 		return firstName;
 	}
 
@@ -88,51 +92,55 @@ public class User implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
+	public boolean getIsCashier() {
+		return isCashier;
+	}
+
 	public Set<Projection> getCurrentProjections() {
-        return this.currentProjections;
-    }
+		return this.currentProjections;
+	}
 
-    public void setCurrentProjections(final Set<Projection> currentProjections) {
-        this.currentProjections = currentProjections;
-    }
+	public void setCurrentProjections(final Set<Projection> currentProjections) {
+		this.currentProjections = currentProjections;
+	}
 
-    @Override
-    public String toString() {
-        String result = getClass().getSimpleName() + " ";
-        if (email != null && !email.trim().isEmpty())
-            result += "email: " + email;
-        if (password != null && !password.trim().isEmpty())
-            result += ", password: " + password;
-        if (firstName != null && !firstName.trim().isEmpty())
-            result += ", firstName: " + firstName;
-        if (lastName != null && !lastName.trim().isEmpty())
-        	result += ", lastName: " + lastName;
-        return result;
-    }
+	@Override
+	public String toString() {
+		String result = getClass().getSimpleName() + " ";
+		if (email != null && !email.trim().isEmpty())
+			result += "email: " + email;
+		if (password != null && !password.trim().isEmpty())
+			result += ", password: " + password;
+		if (firstName != null && !firstName.trim().isEmpty())
+			result += ", firstName: " + firstName;
+		if (lastName != null && !lastName.trim().isEmpty())
+			result += ", lastName: " + lastName;
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof User)) {
-            return false;
-        }
-        User other = (User) obj;
-        if (id != null) {
-            if (!id.equals(other.id)) {
-                return false;
-            }
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof User)) {
+			return false;
+		}
+		User other = (User) obj;
+		if (id != null) {
+			if (!id.equals(other.id)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 }
