@@ -1,6 +1,9 @@
 $(document).ready(function() {
     var $LoginButton = $("#login-button"),
         $RegisterButton = $("#register-button");
+    
+   
+    
 
     $LoginButton.on("click", function() {
         // TODO VALIDATION
@@ -23,7 +26,16 @@ $(document).ready(function() {
                 },
                 200: function() {
                     alert("Authentication is fine!");
-                    window.location.replace("home.html");
+                    
+                    var id = 0;
+                    $.getJSON("rest/projection/", function(data){
+                    	id = data.projection[0].id;
+                    	
+                        $.ajax({
+                            url: 'rest/projection/buy' + "?" + "projectionId=" + id + "&place=4,1,2,3,8",
+                            type: "POST"
+                        });
+                    });
                 }
             }
         });
