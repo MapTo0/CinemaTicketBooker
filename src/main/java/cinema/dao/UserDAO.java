@@ -18,6 +18,7 @@ public class UserDAO {
 
     public void addUser(User user) {
     	System.out.println(user.getEmail() + " " + user.getPassword());
+    	System.out.println(user.getFirstName() + " " + user.getLastName());
         user.setPassword(getHashedPassword(user.getPassword()));
         em.persist(user);
     }

@@ -8,6 +8,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -42,6 +43,9 @@ public class UserManager {
     	if(!isUserValid) {
     		return Response.status(HttpURLConnection.HTTP_UNAUTHORIZED).build();
     	}
+    	
+    	User curUser = userDAO.findUserByName(user.getEmail());
+    	System.out.println(curUser);
     	context.setCurrentUser(user);
     	return RESPONSE_OK;
     }
@@ -58,12 +62,13 @@ public class UserManager {
     
     @Path("current")
     @GET
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
     public String getUser(){
     	if(context.getCurrentUser() == null){
+    		System.out.println(context.getCurrentUser().getFirstName());
     		return null;
     	}
-    	return context.getCurrentUser().getEmail();
+    	return context.getCurrentUser().getFirstName();
     }
     
     @Path("logout")

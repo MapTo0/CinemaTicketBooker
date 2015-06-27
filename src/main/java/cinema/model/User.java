@@ -19,7 +19,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "USERS")
 @NamedQueries({
     
-    @NamedQuery(name = "getAllUsers", query = "SELECT u FROM User u")})
+    @NamedQuery(name = "getAllUsers", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "findUserByEmail", query = "SELECT u FROM User u WHERE u.email=:email")})
+
 public class User implements Serializable {
 
     private static final long serialVersionUID = -7196507424378163030L;
@@ -36,17 +38,20 @@ public class User implements Serializable {
    
     private String lastName;
     
+    private boolean isCashier;
+    
     @OneToMany
     private Set<Projection> currentProjections = new HashSet<>();
 
     public User() {
     }
 
-    public User(String email, String password, String firstName, String lastName) {
+    public User(String email, String password, String firstName, String lastName, boolean isCashier) {
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isCashier = isCashier;
     }
 
     public Long getId() {
@@ -96,14 +101,22 @@ public class User implements Serializable {
     public void setCurrentProjections(final Set<Projection> currentProjections) {
         this.currentProjections = currentProjections;
     }
+    
+    public boolean isCashier() {
+		return isCashier;
+	}
 
-    @Override
+	public void setCashier(boolean isCashier) {
+		this.isCashier = isCashier;
+	}
+
+	@Override
     public String toString() {
         String result = getClass().getSimpleName() + " ";
         if (email != null && !email.trim().isEmpty())
             result += "email: " + email;
         if (password != null && !password.trim().isEmpty())
-            result += ", password: " + password;
+        	result += "password: " + password;
         if (firstName != null && !firstName.trim().isEmpty())
             result += ", firstName: " + firstName;
         if (lastName != null && !lastName.trim().isEmpty())

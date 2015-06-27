@@ -14,9 +14,9 @@ import cinema.model.User;
 public class DatabaseUtils {
     
     private static User[] USERS = {
-            new User("test1@mail.bg", "123", "A", "AA"),
-            new User("test2@mail.bg", "1234", "B", "BB"),
-            new User("test2@mail.bg", "1235", "V", "VV")};
+            new User("a", "123", "A", "AA", true),
+            new User("b", "1234", "B", "BB", false),
+            new User("c", "1235", "V", "VV", false)};
 
     private static Projection[] PROJECTIONS = {
             new Projection("Furious Seven", 12,12, "16:00", "http://blogs-images.forbes.com/markhughes/files/2015/04/Furious-7.jpg"),
