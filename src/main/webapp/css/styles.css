@@ -47,6 +47,7 @@ ul {
 
 #footer {
     height: 15%;
+    background-color: black;
 }
 
 #login-form {
@@ -85,7 +86,7 @@ ul {
     flex-direction: column;
 }
 
-section {
+.index-sections {
     width: 50%;
     height: 100%;
     display: flex;
@@ -98,7 +99,7 @@ section {
     align-items: flex-start;
 }
 
-.main section h1 {
+.index-sections h1 {
     height: 10%;
     display: flex;
     margin-bottom: 20px;
@@ -138,38 +139,38 @@ section {
     font-weight: bold;
 }
 
-section img {
+.index-sections img {
     width: 90px;
     height: 70px;
 }
 
-section span {
+.index-sections span {
     font-size: 2rem;
 }
 
-section ul {
+.index-sections ul {
     justify-content: space-around;
     display: flex;
     flex-direction: column;
     height: 75%;
 }
 
-section ul li {
+.index-sections ul li {
     align-self: baseline;
     display: flex;
 }
 
-section ul li span {
+.index-sections ul li span {
     align-self: center;
 }
 
-section ul li img {
+.index-sections ul li img {
     margin-right: 20px;
 }
 
 #footer {
     display: flex;
-    height: 40%;
+    height: 10%;
     justify-content: center;
 }
 
@@ -181,11 +182,17 @@ section ul li img {
     width: 24%;
 }
 
-#hole, #booking-area {
+#hole,
+#booking-area {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
+    justify-content: space-around;
+}
+
+#booking-area > section {
+    height: 15%;
 }
 
 #screen {
@@ -217,6 +224,10 @@ section ul li img {
     font-size: 120%;
 }
 
+#book-main {
+    height: 80%;
+}
+
 #book-main > div {
     width: 40%;
     padding-top: 10px;
@@ -235,4 +246,75 @@ section ul li img {
 
 #booking-btns {
     display: flex;
+}
+
+#booking-area > section {
+    width: 100%;
+    text-align: center;
+}
+
+#booking-area h2 {
+    text-align: center;
+}
+
+#book-btn {
+    width: 90%;
+    height: 40px;
+    margin-top: 10px;
+}
+
+#poster-section {
+    height: 70% !important;
+}
+
+#poster {
+    height: 90%;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.booked {
+    background-color: yellow;
+}
+
+#booking-list {
+    margin: 0;
+    height: 50%;
+    width: 100%;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+#payment-section {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.booking-items {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+}
+
+.booking-items > input {
+    height: 40px;
+    width: 40px;
+}
+
+#payment-section > button {
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.no-style {
+    color: white;
+    text-decoration: none;
 }
