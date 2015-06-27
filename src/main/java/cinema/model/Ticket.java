@@ -6,13 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TICKETS")
-@NamedQueries({ @NamedQuery(name = "getProjectionTickets", query = "SELECT t FROM Ticket t WHERE t.projectionId=:projectionId") })
+@NamedQuery(name = "getProjectionTickets", query = "SELECT t FROM Ticket t WHERE t.projectionId=:projectionId")
 public class Ticket implements Serializable {
 	/**
 	 * 
@@ -22,6 +21,26 @@ public class Ticket implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long ticketId;
+
+	private Long projectionId;
+	private User owner;
+	private int seat;
+
+	public Ticket() {
+
+	}
+
+	public Ticket(Long projectionId, User owner, int seat) {
+		this.owner = owner;
+		this.projectionId = projectionId;
+		this.seat = seat;
+	}
+
+	public Ticket(BookedTicket bookedTicket) {
+		this.projectionId = bookedTicket.getProjectionId();
+		this.owner = bookedTicket.getUser();
+		this.seat = bookedTicket.getSeat();
+	}
 
 	public Long getTicketId() {
 		return ticketId;
@@ -57,13 +76,5 @@ public class Ticket implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	private Long projectionId;
-	private User owner;
-	private int seat;
-
-	public Ticket() {
-
 	}
 }
