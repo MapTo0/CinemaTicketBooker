@@ -37,7 +37,7 @@ public class Ticket implements Serializable {
 	}
 
 	public Ticket(BookedTicket bookedTicket) {
-		this.projectionId = bookedTicket.getProjectionId();
+	//	this.projectionId = bookedTicket.getProjectionId();
 		this.owner = bookedTicket.getUser();
 		this.seat = bookedTicket.getSeat();
 	}

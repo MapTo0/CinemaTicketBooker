@@ -47,6 +47,7 @@ public class DatabaseUtils {
 
     private void addTestUsers() {
         for (User user : USERS) {
+        	//user.getCurrentProjections().add(new Projection("American Sniper", 52, 51, "21:41", "http://www.theamericanmirror.com/wp-content/uploads/2015/04/American-Sniper-Movie-Poster-7.jpg"));
             userDAO.addUser(user);
         }
     }
