@@ -44,7 +44,7 @@ public class ProjectionDAO {
 
 	public void buyTicket(Projection projection, User userWhoBuyTicket, String places) {
 		String[] finalPlace = places.split(",");
-		Projection foundProjection = findById(projection.getId());
+		Projection foundProjection = findByMovieTitle(projection.getMovieTitle());
 		int freePlaces = foundProjection.getFreePlaces() - finalPlace.length;
 		for(String s : finalPlace) {
 			foundProjection.getPlaces().add(Integer.parseInt(s), false);
