@@ -12,6 +12,6 @@ public class CashierViewAllTickets {
 	@Produces("application/json")
 	public String getBoughtTickets(
 			@QueryParam("projectionId") String projectionId) {
-
+		return null;
 	}
 }
