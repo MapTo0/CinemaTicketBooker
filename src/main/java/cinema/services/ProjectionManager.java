@@ -45,8 +45,6 @@ public class ProjectionManager {
 	public Response buyTicket(@QueryParam("projectionId") String projectionId, @QueryParam("place") String place){
 		Projection projection = projectionDAO.findById(Long.parseLong(projectionId));
 		if(projection != null){
-			System.out.println(projection.getMovieTitle());
-			System.out.println(place);
 			projectionDAO.buyTicket(projection, userContext.getCurrentUser(), place);
 		}
 		
