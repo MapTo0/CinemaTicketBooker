@@ -37,7 +37,7 @@ public class UserManager {
     
     @Path("login")
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes("application/json")
     public Response loginUser(User user){
     	boolean isUserValid = userDAO.validateUserCredentials(user.getEmail(), user.getPassword());
     	if(!isUserValid) {
@@ -46,7 +46,7 @@ public class UserManager {
     	
     	User curUser = userDAO.findUserByName(user.getEmail());
     	System.out.println(curUser);
-    	context.setCurrentUser(user);
+    	context.setCurrentUser(curUser);
     	return RESPONSE_OK;
     }
     
@@ -62,13 +62,13 @@ public class UserManager {
     
     @Path("current")
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String getUser(){
     	if(context.getCurrentUser() == null){
     		System.out.println(context.getCurrentUser().getFirstName());
-    		return null;
+    		return "null";
     	}
-    	return context.getCurrentUser().getFirstName();
+    	return context.getCurrentUser().toString();
     }
     
     @Path("logout")

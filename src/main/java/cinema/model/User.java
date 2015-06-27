@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -116,15 +115,14 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		String result = getClass().getSimpleName() + " ";
+		String result = "";
 		if (email != null && !email.trim().isEmpty())
 			result += "email: " + email;
-		if (password != null && !password.trim().isEmpty())
-			result += "password: " + password;
 		if (firstName != null && !firstName.trim().isEmpty())
 			result += ", firstName: " + firstName;
 		if (lastName != null && !lastName.trim().isEmpty())
 			result += ", lastName: " + lastName;
+		result += ", isCashier : " + isCashier;
 		return result;
 	}
 

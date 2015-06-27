@@ -3,7 +3,6 @@ package cinema.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +11,8 @@ import javax.persistence.Id;
 @Entity
 public class BookedTicket implements Serializable{
 	
+	private static final long serialVersionUID = -3764550360380396095L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

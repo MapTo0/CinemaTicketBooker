@@ -1,7 +1,6 @@
 package cinema.services;
 
 import java.util.Collection;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
