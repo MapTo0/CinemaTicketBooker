@@ -1,6 +1,7 @@
 package cinema.services;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,16 +28,7 @@ public class CashierViewAllTickets {
 	public Collection<Projection> getBoughtTickets(@PathParam("email") String email) {
 		User user = userDAO.findUserByName(email);
 		if(user != null){
-			System.out.println("NOT NULL");
-			if(user.getCurrentProjections() == null){
-				System.out.println("Collection is null");
-			} else {
-				System.out.println("Collection is not null");
-			}
-			System.out.println(user.getCurrentProjections().size());
 			return user.getCurrentProjections();
-		} else {
-			System.out.println("NULL");
 		}
 		return null;
 	}
