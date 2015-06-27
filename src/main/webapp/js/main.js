@@ -22,16 +22,7 @@ $(document).ready(function() {
                 },
                 200: function() {
                     alert("Authentication is fine!");
-                    
-                    var id = 0;
-                    $.getJSON("rest/projection/", function(data){
-                    	id = data.projection[0].id;
-                    	
-                        $.ajax({
-                            url: 'rest/projection/buy' + "?" + "projectionId=" + id + "&place=4,1,2,3,8",
-                            type: "POST"
-                        });
-                    });
+                    window.location.replace("home.html");
                 }
             }
         });
