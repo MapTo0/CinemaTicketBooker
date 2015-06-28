@@ -318,3 +318,17 @@ ul {
     color: white;
     text-decoration: none;
 }
+
+.search-divs {
+    display: flex;
+    width: 100%;
+}
+
+.search-divs > input {
+    width: 50%;
+    height: 40px;
+}
+
+.search-divs > button {
+    width: 50%;
+}
