@@ -6,56 +6,52 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TICKETS")
-@NamedQuery(name = "getProjectionTickets", query = "SELECT t FROM Ticket t WHERE t.projectionId=:projectionId")
+@NamedQueries({@NamedQuery(name = "getAllTickets", query = "SELECT t FROM Ticket t"), 
+	@NamedQuery(name = "findTicketByMovieTitle", query = "SELECT t FROM Ticket t WHERE t.projection.movieTitle = :movieTitle")})
 public class Ticket implements Serializable {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -473800766770173540L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long ticketId;
+	private Long id;
 
-	private Long projectionId;
+	private Projection projection;
+	
 	private User owner;
+	
 	private int seat;
-
+	
 	public Ticket() {
 
 	}
 
-	public Ticket(Long projectionId, User owner, int seat) {
+	public Ticket(Projection projection , User owner, int seat) {
+		this.projection = projection;
 		this.owner = owner;
-		this.projectionId = projectionId;
 		this.seat = seat;
 	}
 
-	public Ticket(BookedTicket bookedTicket) {
-	//	this.projectionId = bookedTicket.getProjectionId();
-		this.owner = bookedTicket.getUser();
-		this.seat = bookedTicket.getSeat();
+	public Long getId() {
+		return id;
 	}
 
-	public Long getTicketId() {
-		return ticketId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setTicketId(Long ticketId) {
-		this.ticketId = ticketId;
+	public Projection getProjection() {
+		return projection;
 	}
 
-	public Long getProjectionId() {
-		return projectionId;
-	}
-
-	public void setProjectionId(Long projectionId) {
-		this.projectionId = projectionId;
+	public void setProjection(Projection projection) {
+		this.projection = projection;
 	}
 
 	public User getOwner() {
@@ -74,7 +70,11 @@ public class Ticket implements Serializable {
 		this.seat = seat;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	@Override
+	public String toString() {
+		return "Ticket [projection=" + projection + ", owner=" + owner
+				+ ", seat=" + seat + "]";
 	}
+	
+	
 }

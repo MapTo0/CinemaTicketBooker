@@ -38,7 +38,7 @@ public class ProjectionManager {
 		return projectionDAO.findById(Long.parseLong(projectionId)).getPlaces()
 				.toString();
 	}
-
+	
 	@POST
 	@Path("/buy")
 	public Response buyTicket(@QueryParam("projectionId") String projectionId,
