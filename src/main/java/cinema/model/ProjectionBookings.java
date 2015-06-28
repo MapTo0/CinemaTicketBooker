@@ -15,10 +15,6 @@ public class ProjectionBookings {
 		this.projection = projection;
 	}
 
-	public void addBookedTicket(User user, int place) {
-		bookedTickets.put(place, new Ticket(this.projection, user, place));
-	}
-
 	public List<Integer> getBookedPlacesArray() {
 		List<Integer> bookedPlaces = new ArrayList<>();
 		for (Entry<Integer, Ticket> entry : bookedTickets.entrySet()) {
@@ -40,13 +36,16 @@ public class ProjectionBookings {
 		return false;
 	}
 
-	public boolean isTicketBooked(int seat) {
+	public boolean isTicketBooked(Integer seat) {
 		return bookedTickets.containsKey(seat);
 	}
 
-	public void bookTicket(int seat, User user) {
+	public void bookTicket(Integer seat, User user) {
 		Ticket ticket = new Ticket(this.projection, user, seat);
 		bookedTickets.put(seat, ticket);
+		for (Entry<Integer, Ticket> entry : bookedTickets.entrySet()) {
+			System.out.println(entry.getKey().intValue());
+		}
 	}
 
 	public void removeBooked(List<Integer> seats) {
