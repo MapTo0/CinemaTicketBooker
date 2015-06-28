@@ -25,13 +25,15 @@ public class Ticket implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	private Timestamp lastAction;
+
 	private Projection projection;
 
 	private User owner;
 
 	private int seat;
 
-	private Timestamp lastAction;
+	private boolean isUserCheckedIn;
 
 	public Ticket() {
 
@@ -42,6 +44,7 @@ public class Ticket implements Serializable {
 		this.owner = owner;
 		this.seat = seat;
 		lastAction = new Timestamp(new Date().getTime());
+		isUserCheckedIn = false;
 	}
 
 	public Long getId() {
@@ -74,6 +77,14 @@ public class Ticket implements Serializable {
 
 	public void setSeat(int seat) {
 		this.seat = seat;
+	}
+
+	public boolean getIsUserCheckedIn() {
+		return isUserCheckedIn;
+	}
+
+	public void setIsUserCheckedIn(boolean isUserCheckedIn) {
+		this.isUserCheckedIn = isUserCheckedIn;
 	}
 
 	public Timestamp getTimestamp() {

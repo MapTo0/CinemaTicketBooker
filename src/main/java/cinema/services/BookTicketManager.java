@@ -9,14 +9,17 @@ import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import cinema.dao.ProjectionDAO;
 import cinema.model.Projection;
 import cinema.model.ProjectionBookings;
+import cinema.model.Ticket;
 
 @Singleton
 @Path("booking")
@@ -99,5 +102,19 @@ public class BookTicketManager {
 		} else {
 			return projection.getBookedPlacesArray();
 		}
+	}
+
+	@GET
+	@Path("/userBookedTickets")
+	@Produces("application/json")
+	public List<Ticket> getUserBookedTickets(
+			@QueryParam(value = "userEmail") String userEmail) {
+		List<Ticket> userTickets = new ArrayList<>();
+		for (Entry<Long, ProjectionBookings> entry : map.entrySet()) {
+			userTickets
+					.addAll(entry.getValue().getUserBookedTickets(userEmail));
+		}
+
+		return userTickets;
 	}
 }

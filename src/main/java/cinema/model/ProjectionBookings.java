@@ -80,4 +80,16 @@ public class ProjectionBookings {
 			bookedTickets.remove(seat);
 		}
 	}
+
+	public List<Ticket> getUserBookedTickets(String userEmail) {
+		List<Ticket> userTickets = new ArrayList<>();
+		for (Entry<Integer, Ticket> entry : bookedTickets.entrySet()) {
+			String mail = entry.getValue().getOwner().getEmail();
+			if (userEmail.equals(mail)) {
+				userTickets.add(entry.getValue());
+			}
+		}
+
+		return userTickets;
+	}
 }
