@@ -45,7 +45,7 @@ $(document).ready(function() {
             console.log(seatId);
 
             $.ajax({
-                url: 'rest/book?projectionId=' + $('#projection-select').find(":selected").attr('data-projectionid') +'&seat=' + seatId,
+                url: 'rest/book?projectionId=' + $('#projection-select').find(":selected").attr('data-projectionid') + '&seat=' + seatId,
                 type: "POST",
                 statusCode: {
                     401: function() {
@@ -75,4 +75,17 @@ $(document).ready(function() {
             };
         }
     });
+
+    $('#logout-button').click(function() {
+        $.ajax({
+            url: 'rest/user/logout',
+            type: "GET",
+            statusCode: {
+                204: function() {
+                    alert("vsichko e ok");
+                    window.location.replace("index.html");
+                }
+            }
+        });
+    })
 });

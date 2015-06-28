@@ -45,11 +45,6 @@ ul {
     flex-direction: row;
 }
 
-#footer {
-    height: 15%;
-    background-color: black;
-}
-
 #login-form {
     width: 50%;
     display: flex;
@@ -171,15 +166,17 @@ ul {
 #footer {
     display: flex;
     height: 10%;
-    justify-content: center;
-}
-
-#footer li {
-    display: inline;
+    justify-content: space-around;
+    background-color: grey;
 }
 
 #footer img {
-    width: 24%;
+    width: 100px;
+    cursor: pointer;
+}
+
+#footer > h3 {
+    align-self: center;
 }
 
 #hole,
@@ -257,7 +254,7 @@ ul {
     text-align: center;
 }
 
-#book-btn {
+#booking-btn {
     width: 90%;
     height: 40px;
     margin-top: 10px;

@@ -3,29 +3,13 @@ $(document).ready(function() {
         $RegisterButton = $("#register-button");
     $LoginButton.on("click", function() {
         // TODO VALIDATION
-        var oUserData = {
-            user: {
-                email: $("#login-email").val(),
-                password: $("#login-password").val()
-            }
-        };
+        callForLogin();
+    });
 
-        $.ajax({
-            url: 'rest/user/login',
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(oUserData),
-            statusCode: {
-                401: function() {
-                    alert("Authentication failed");
-                    // TODO CLEAR
-                },
-                200: function() {
-                    alert("Authentication is fine!");
-                    window.location.replace("home.html");
-                }
-            }
-        });
+    $('#login-password').keydown(function(e) {
+        if (e.keyCode == 13) {
+            callForLogin();
+        }
     });
 
     $RegisterButton.click(function() {
@@ -54,4 +38,30 @@ $(document).ready(function() {
                 $("#register-form").submit();
             });
     });
+
+    function callForLogin() {
+
+        var oUserData = {
+            user: {
+                email: $("#login-email").val(),
+                password: $("#login-password").val()
+            }
+        };
+        $.ajax({
+            url: 'rest/user/login',
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(oUserData),
+            statusCode: {
+                401: function() {
+                    alert("Authentication failed");
+                    // TODO CLEAR
+                },
+                200: function() {
+                    alert("Authentication is fine!");
+                    window.location.replace("home.html");
+                }
+            }
+        });
+    }
 });
