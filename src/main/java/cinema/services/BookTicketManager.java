@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -17,7 +18,7 @@ import cinema.dao.ProjectionDAO;
 import cinema.model.Projection;
 import cinema.model.ProjectionBookings;
 
-@Singleton
+@Stateless
 public class BookTicketManager {
 	private static final Map<Long, ProjectionBookings> map = new HashMap<>();
 	private static Object lock;
@@ -29,6 +30,12 @@ public class BookTicketManager {
 	private ProjectionDAO projectionDao;
 
 	public BookTicketManager() {
+		if(projectionDao == null){
+			System.out.println("null");
+		} else {
+			System.out.println("not null");
+		}
+			
 		Collection<Projection> projections = projectionDao.getAllProjections();
 		for (Projection projection : projections) {
 			map.put(projection.getId(), new ProjectionBookings(projection));
