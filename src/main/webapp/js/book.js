@@ -33,8 +33,6 @@ $(document).ready(function() {
         });
 
         $BookingBtn.click(function() {
-            // alert('CALL to the service for booking tickets here');
-
             var seatsForBooking = $('#seats > .booked'),
                 seatId = "";
             $.each(seatsForBooking, function(el) {
@@ -42,22 +40,18 @@ $(document).ready(function() {
                 el === (seatsForBooking.length - 1) ? "" : seatId += ",";
             });
 
-            console.log(seatId);
-
             $.ajax({
                 url: 'rest/booking/book?projectionId=' + $('#projection-select').find(":selected").attr('data-projectionid') + '&seat=' + seatId,
                 type: "POST",
                 statusCode: {
                     401: function() {
-                        alert("basi typoto brat");
+                        alert("За съжаление някой вече е запазил тези места, моля изберете други.");
                     },
                     200: function() {
-                        alert("vsichko e ok");
-                        window.location.replace("shopping-cart.html");
+                        alert("Успешна резервация на билети! Моля преминете към количка, за да ги платите.");
                     }
                 }
             });
-            // window.location.replace("shopping-cart.html");
         })
 
         function fillSeats(aData) {
@@ -82,10 +76,14 @@ $(document).ready(function() {
             type: "GET",
             statusCode: {
                 204: function() {
-                    alert("vsichko e ok");
+                    alert("Успешно излизане от системата!");
                     window.location.replace("index.html");
                 }
             }
         });
-    })
+    });
+
+    $('#shopping-cart-button').click(function() {
+        window.location.replace("shopping-cart.html");
+    });
 });
