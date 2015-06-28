@@ -11,7 +11,7 @@ $(document).ready(function() {
 
         for (var i = 0; i < aProjectionData.length; i++) {
             var oProjection = aProjectionData[i];
-            $Projections.append('<option value="' + oProjection.movieTitle + '"' + (i === 0 ? " selected" : "") + ">" + oProjection.movieTitle + "</option>");
+            $Projections.append('<option' + ' data-projectionId="' + oProjection.id + '"' + ' value="' + oProjection.movieTitle + '"' + (i === 0 ? " selected" : "") + ">" + oProjection.movieTitle + "</option>");
             if (i === 0) {
                 $.getJSON("rest/projection/" + oProjection.id, function(aData) {
                     fillSeats(aData);
@@ -33,8 +33,31 @@ $(document).ready(function() {
         });
 
         $BookingBtn.click(function() {
-            alert('CALL to the service for booking tickets here');
-            window.location.replace("shopping-cart.html");
+            // alert('CALL to the service for booking tickets here');
+
+            var seatsForBooking = $('#seats > .booked'),
+                seatId = "";
+            $.each(seatsForBooking, function(el) {
+                seatId += $(seatsForBooking[el]).attr('data-seatid');
+                el === (seatsForBooking.length - 1) ? "" : seatId += ",";
+            });
+
+            console.log(seatId);
+
+            $.ajax({
+                url: 'rest/book?projectionid=' + $('#projection-select').find(":selected").attr('data-projectionid') +'&seat=' + seatId,
+                type: "POST",
+                statusCode: {
+                    401: function() {
+                        alert("basi typoto brat");
+                    },
+                    200: function() {
+                        alert("vsichko e ok");
+                        window.location.replace("shopping-cart.html");
+                    }
+                }
+            });
+            // window.location.replace("shopping-cart.html");
         })
 
         function fillSeats(aData) {
@@ -43,9 +66,9 @@ $(document).ready(function() {
                     text: "Място номер: " + (i + 1),
                     class: "seat" + " " + (!aData[i] ? "taken" : ""),
                     "data-booked": aData[i],
-                    "data-seatId": (i - 1),
+                    "data-seatId": i,
                     click: function(oEvent) {
-                        $(oEvent.target).addClass('booked');
+                        $(oEvent.target).toggleClass('booked');
                     }
                 });
                 i === 0 ? $Seats.html($Button) : $Seats.append($Button);
