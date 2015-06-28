@@ -6,10 +6,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import cinema.dao.TicketDAO;
 import cinema.dao.UserDAO;
 import cinema.model.Ticket;
 import cinema.model.User;
@@ -21,6 +21,9 @@ public class CashierViewAllTickets {
 	
 	@Inject
 	private UserDAO userDAO;
+	
+	@Inject
+	private TicketDAO ticketDAO;
 	
 	@GET
 	@Path("/user")
@@ -36,6 +39,6 @@ public class CashierViewAllTickets {
 	@GET
 	@Path("/projection")
 	public Collection<Ticket> getBoughtTicketsForProjection(@QueryParam("movieTitle") String movieTitle){
-		return null;
+		return ticketDAO.findByMovieTitle(movieTitle);
 	}
 }

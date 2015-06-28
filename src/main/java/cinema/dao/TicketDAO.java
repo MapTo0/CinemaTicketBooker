@@ -5,7 +5,6 @@ import java.util.Collection;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -38,9 +37,9 @@ public class TicketDAO {
 		Projection projection = projectionDAO.findByMovieTitle(movieTitle);
 		TypedQuery<Ticket> query = em.createNamedQuery(
 				"findTicketByMovieTitle", Ticket.class).setParameter(
-				"projection", movieTitle);
+				"projection", projection);
+		return query.getResultList();
 
-		return null;
 	}
 
 }
