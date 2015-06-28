@@ -119,9 +119,7 @@ public class User implements Serializable {
 			result += "email: " + email;
 		if (firstName != null && !firstName.trim().isEmpty())
 			result += ", firstName: " + firstName;
-		if (lastName != null && !lastName.trim().isEmpty())
-			result += ", lastName: " + lastName;
-		result += ", isCashier : " + isCashier;
+		result += ", isCashier: " + isCashier;
 		return result;
 	}
 

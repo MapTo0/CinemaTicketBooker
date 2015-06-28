@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -13,51 +14,59 @@ import cinema.model.User;
 @Singleton
 public class UserDAO {
 
-    @PersistenceContext
-    private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
-    public void addUser(User user) {
-    	System.out.println(user.getEmail() + " " + user.getPassword());
-    	System.out.println(user.getFirstName() + " " + user.getLastName());
-        user.setPassword(getHashedPassword(user.getPassword()));
-        em.persist(user);
-    }
+	public boolean addUser(User user) {
+		String userEmail = user.getEmail();
+		boolean isOk = false;
+		try {
+		em.createNamedQuery("findUserByEmail", User.class)
+				.setParameter("email", userEmail).getSingleResult();
+		} catch (NoResultException ex){
+			user.setPassword(getHashedPassword(user.getPassword()));
+			em.persist(user);
+			isOk = true;
+		}
+		
+		return isOk;
+	}
 
-    public boolean validateUserCredentials(String email, String password) {
-        String txtQuery = "SELECT u FROM User u WHERE u.email=:email AND u.password=:password";
-        TypedQuery<User> query = em.createQuery(txtQuery, User.class);
-        System.out.println(email + " " + password);
-        query.setParameter("email", email);
-        query.setParameter("password", getHashedPassword(password));
-        return queryUser(query) != null;
-    }
+	public boolean validateUserCredentials(String email, String password) {
+		String txtQuery = "SELECT u FROM User u WHERE u.email=:email AND u.password=:password";
+		TypedQuery<User> query = em.createQuery(txtQuery, User.class);
+		System.out.println(email + " " + password);
+		query.setParameter("email", email);
+		query.setParameter("password", getHashedPassword(password));
+		return queryUser(query) != null;
+	}
 
-    public User findUserByName(String email) {
-        String txtQuery = "SELECT u FROM User u WHERE u.email = :email";
-        TypedQuery<User> query = em.createQuery(txtQuery, User.class);
-        query.setParameter("email", email);
-        return queryUser(query);
-    }
-    
-    public Collection<User> getAllUsers() {
-        return em.createNamedQuery("getAllUsers", User.class).getResultList();
-    }
+	public User findUserByName(String email) {
+		String txtQuery = "SELECT u FROM User u WHERE u.email = :email";
+		TypedQuery<User> query = em.createQuery(txtQuery, User.class);
+		query.setParameter("email", email);
+		return queryUser(query);
+	}
 
-    private User queryUser(TypedQuery<User> query) {
-        try {
-            return query.getSingleResult();
-        } catch (Exception e) {
-            return null;
-        }
-    }
+	public Collection<User> getAllUsers() {
+		return em.createNamedQuery("getAllUsers", User.class).getResultList();
+	}
 
-    private String getHashedPassword(String password) {
-        try {
-            MessageDigest mda = MessageDigest.getInstance("SHA-512");
-            password = new String(mda.digest(password.getBytes()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return password;
-    }
+	private User queryUser(TypedQuery<User> query) {
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private String getHashedPassword(String password) {
+		try {
+			MessageDigest mda = MessageDigest.getInstance("SHA-512");
+			password = new String(mda.digest(password.getBytes()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return password;
+	}
 }
