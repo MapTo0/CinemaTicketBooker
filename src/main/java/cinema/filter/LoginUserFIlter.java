@@ -16,13 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 import cinema.model.User;
 import cinema.services.UserContext;
 
-@WebFilter({"/rest/projection/*"})
-public class ProtectedBuyFilter implements Filter {
+@WebFilter({ "/rest/user/login", "/rest/user/register" })
+public class LoginUserFIlter implements Filter {
 
 	@Inject
-	UserContext userContext;
+	private UserContext userContext;
 
 	public void init(FilterConfig fConfig) throws ServletException {
+
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,
@@ -33,9 +34,9 @@ public class ProtectedBuyFilter implements Filter {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		User currentUser = userContext.getCurrentUser();
-		if (currentUser == null) {
+		if (currentUser != null) {
 			String loginUrl = httpServletRequest.getContextPath()
-					+ "/notauthorized.html";
+					+ "/home.html";
 			httpServletResponse.sendRedirect(loginUrl);
 			return;
 		}
@@ -48,6 +49,7 @@ public class ProtectedBuyFilter implements Filter {
 	}
 
 	public void destroy() {
+
 	}
 
 }
