@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import cinema.dao.ProjectionDAO;
 import cinema.model.Projection;
+import cinema.model.Ticket;
 
 @Stateless
 @Path("projection")
@@ -38,16 +39,18 @@ public class ProjectionManager {
 		return projectionDAO.findById(Long.parseLong(projectionId)).getPlaces()
 				.toString();
 	}
-	
+
 	@POST
 	@Path("/buy")
 	public Response buyTicket(@QueryParam("projectionId") String projectionId,
 			@QueryParam("place") String place) {
 		Projection projection = projectionDAO.findById(Long
 				.parseLong(projectionId));
+		String[] finalPlace = place.split(",");
 		if (projection != null) {
-			projectionDAO.buyTicket(projection, userContext.getCurrentUser(),
-					place);
+			for (String p : finalPlace) {
+				Ticket ticket = new Ticket(projection,userContext.getCurrentUser(), Integer.valueOf(p));projectionDAO.buyTicket(ticket);
+			}
 		}
 
 		return Response.noContent().build();

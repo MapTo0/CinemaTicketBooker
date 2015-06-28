@@ -41,8 +41,7 @@ public class User implements Serializable {
 	private boolean isCashier;
 
 	@OneToMany(fetch = FetchType.EAGER)
-	//@ElementCollection
-	private Set<Projection> currentProjections;
+	private Set<Ticket> currentTickets;
 
 	public User() {
 	}
@@ -54,7 +53,7 @@ public class User implements Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.isCashier = isCashier;
-		this.currentProjections = new HashSet<Projection>();
+		this.currentTickets = new HashSet<Ticket>();
 	}
 
 	public Long getId() {
@@ -97,12 +96,12 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public Set<Projection> getCurrentProjections() {
-		return this.currentProjections;
+	public Set<Ticket> getCurrentTickets() {
+		return this.currentTickets;
 	}
 
-	public void setCurrentProjections(final Set<Projection> currentProjections) {
-		this.currentProjections = currentProjections;
+	public void setCurrentTickets(final Set<Ticket> currentTickets) {
+		this.currentTickets = currentTickets;
 	}
 
 	public boolean isCashier() {

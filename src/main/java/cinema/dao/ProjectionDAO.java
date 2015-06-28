@@ -9,12 +9,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import cinema.model.Projection;
-import cinema.model.User;
+import cinema.model.Ticket;
 
 @Singleton
 public class ProjectionDAO {
 
-	
 	@PersistenceContext
 	private EntityManager em;
 
@@ -42,16 +41,13 @@ public class ProjectionDAO {
 		}
 	}
 
-	public void buyTicket(Projection projection, User userWhoBuyTicket, String places) {
-		String[] finalPlace = places.split(",");
-		Projection foundProjection = findByMovieTitle(projection.getMovieTitle());
-		int freePlaces = foundProjection.getFreePlaces() - finalPlace.length;
-		for(String s : finalPlace) {
-			foundProjection.getPlaces().add(Integer.parseInt(s), false);
-		}
-		
+	public void buyTicket(Ticket ticket) {
+		Projection foundProjection = findByMovieTitle(ticket.getProjection()
+				.getMovieTitle());
+		int freePlaces = foundProjection.getFreePlaces() - 1;
+		foundProjection.getPlaces().add(ticket.getSeat(), false);
 		foundProjection.setFreePlaces(freePlaces);
-		userWhoBuyTicket.getCurrentProjections().add(foundProjection);
+		ticket.getOwner().getCurrentTickets().add(ticket);
 	}
 
 }

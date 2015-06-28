@@ -10,7 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import cinema.dao.UserDAO;
-import cinema.model.Projection;
+import cinema.model.Ticket;
 import cinema.model.User;
 
 @Singleton
@@ -24,10 +24,10 @@ public class CashierViewAllTickets {
 	@GET
 	@Path("{email}")
 	@Produces("application/json")
-	public Collection<Projection> getBoughtTickets(@PathParam("email") String email) {
+	public Collection<Ticket> getBoughtTickets(@PathParam("email") String email) {
 		User user = userDAO.findUserByName(email);
 		if(user != null){
-			return user.getCurrentProjections();
+			return user.getCurrentTickets();
 		}
 		return null;
 	}
