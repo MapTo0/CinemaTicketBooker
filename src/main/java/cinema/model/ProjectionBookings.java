@@ -7,12 +7,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ProjectionBookings {
-	private final Long id;
 	private final Map<Integer, Ticket> bookedTickets;
 
-	public ProjectionBookings(Long id) {
+	public ProjectionBookings() {
 		bookedTickets = new HashMap<>();
-		this.id = id;
 	}
 
 	public void addBookedTicket(User user, int place) {
@@ -47,5 +45,17 @@ public class ProjectionBookings {
 	public void bookTicket(int seat, User user) {
 		Ticket ticket = new Ticket(id, user, seat);
 		bookedTickets.put(seat, ticket);
+	}
+
+	public void removeBooked(int seat) {
+		if (bookedTickets.containsKey(seat)) {
+			bookedTickets.remove(seat);
+		}
+	}
+
+	public void removeBooked(List<Integer> seats) {
+		for (int i : seats) {
+			removeBooked(i);
+		}
 	}
 }
