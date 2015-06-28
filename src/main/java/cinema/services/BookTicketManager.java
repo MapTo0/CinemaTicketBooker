@@ -31,7 +31,7 @@ public class BookTicketManager {
 	public BookTicketManager() {
 		Collection<Projection> projections = projectionDao.getAllProjections();
 		for (Projection projection : projections) {
-			map.put(projection.getId(), new ProjectionBookings());
+			map.put(projection.getId(), new ProjectionBookings(projection));
 		}
 	}
 

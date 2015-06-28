@@ -8,13 +8,15 @@ import java.util.Map.Entry;
 
 public class ProjectionBookings {
 	private final Map<Integer, Ticket> bookedTickets;
+	private final Projection projection;
 
-	public ProjectionBookings() {
+	public ProjectionBookings(Projection projection) {
 		bookedTickets = new HashMap<>();
+		this.projection = projection;
 	}
 
 	public void addBookedTicket(User user, int place) {
-		bookedTickets.put(place, new Ticket(this.id, user, place));
+		bookedTickets.put(place, new Ticket(this.projection, user, place));
 	}
 
 	public List<Integer> getBookedPlacesArray() {
@@ -43,7 +45,7 @@ public class ProjectionBookings {
 	}
 
 	public void bookTicket(int seat, User user) {
-		Ticket ticket = new Ticket(id, user, seat);
+		Ticket ticket = new Ticket(this.projection, user, seat);
 		bookedTickets.put(seat, ticket);
 	}
 
