@@ -1,6 +1,8 @@
 package cinema.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +14,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TICKETS")
-@NamedQueries({@NamedQuery(name = "getAllTickets", query = "SELECT t FROM Ticket t"), 
-	@NamedQuery(name = "findTicketByMovieTitle", query = "SELECT t FROM Ticket t WHERE t.projection.movieTitle = :movieTitle")})
+@NamedQueries({
+		@NamedQuery(name = "getAllTickets", query = "SELECT t FROM Ticket t"),
+		@NamedQuery(name = "findTicketByMovieTitle", query = "SELECT t FROM Ticket t WHERE t.projection = :projection") })
 public class Ticket implements Serializable {
-	
+
 	private static final long serialVersionUID = -473800766770173540L;
 
 	@Id
@@ -23,19 +26,22 @@ public class Ticket implements Serializable {
 	private Long id;
 
 	private Projection projection;
-	
+
 	private User owner;
-	
+
 	private int seat;
-	
+
+	private Timestamp lastAction;
+
 	public Ticket() {
 
 	}
 
-	public Ticket(Projection projection , User owner, int seat) {
+	public Ticket(Projection projection, User owner, int seat) {
 		this.projection = projection;
 		this.owner = owner;
 		this.seat = seat;
+		lastAction = new Timestamp(new Date().getTime());
 	}
 
 	public Long getId() {
@@ -70,11 +76,18 @@ public class Ticket implements Serializable {
 		this.seat = seat;
 	}
 
+	public Timestamp getTimestamp() {
+		return lastAction;
+	}
+
+	public void setTimestamp(Date date) {
+		lastAction = new Timestamp(date.getTime());
+	}
+
 	@Override
 	public String toString() {
 		return "Ticket [projection=" + projection + ", owner=" + owner
 				+ ", seat=" + seat + "]";
 	}
-	
-	
+
 }
