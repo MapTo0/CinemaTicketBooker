@@ -21,7 +21,7 @@ public class ProjectionManager {
 
 	@Inject
 	private ProjectionDAO projectionDAO;
-	
+
 	@Inject
 	private UserContext userContext;
 
@@ -35,19 +35,21 @@ public class ProjectionManager {
 	@Path("{projectionId}")
 	@Produces("application/json")
 	public String places(@PathParam("projectionId") String projectionId) {
-		return projectionDAO.findById(Long.parseLong(projectionId)).getPlaces().toString();
+		return projectionDAO.findById(Long.parseLong(projectionId)).getPlaces()
+				.toString();
 	}
-	
-	
-	
+
 	@POST
 	@Path("/buy")
-	public Response buyTicket(@QueryParam("projectionId") String projectionId, @QueryParam("place") String place){
-		Projection projection = projectionDAO.findById(Long.parseLong(projectionId));
-		if(projection != null){
-			projectionDAO.buyTicket(projection, userContext.getCurrentUser(), place);
+	public Response buyTicket(@QueryParam("projectionId") String projectionId,
+			@QueryParam("place") String place) {
+		Projection projection = projectionDAO.findById(Long
+				.parseLong(projectionId));
+		if (projection != null) {
+			projectionDAO.buyTicket(projection, userContext.getCurrentUser(),
+					place);
 		}
-		
+
 		return Response.noContent().build();
 	}
 }

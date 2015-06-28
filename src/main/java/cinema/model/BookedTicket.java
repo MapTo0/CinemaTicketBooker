@@ -9,32 +9,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class BookedTicket implements Serializable{
-	
+public class BookedTicket implements Serializable {
+
 	private static final long serialVersionUID = -3764550360380396095L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private Projection projection;
-	
+
 	private User user;
-	
+
 	private int seat;
-	
+
 	private Timestamp bookedTime;
-	
-	public BookedTicket(Projection projection, User user, int seat, Timestamp bookedTime){
+
+	public BookedTicket(Projection projection, User user, int seat,
+			Timestamp bookedTime) {
 		super();
 		this.projection = projection;
 		this.user = user;
 		this.seat = seat;
 		this.bookedTime = bookedTime;
 	}
-	
-	public BookedTicket(){
-		
+
+	public BookedTicket() {
+
 	}
 
 	public Long getId() {
@@ -130,7 +131,5 @@ public class BookedTicket implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
 }
