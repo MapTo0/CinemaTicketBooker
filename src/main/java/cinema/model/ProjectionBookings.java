@@ -49,15 +49,15 @@ public class ProjectionBookings {
 		bookedTickets.put(seat, ticket);
 	}
 
-	public void removeBooked(int seat) {
-		if (bookedTickets.containsKey(seat)) {
-			bookedTickets.remove(seat);
-		}
-	}
-
 	public void removeBooked(List<Integer> seats) {
 		for (int i : seats) {
 			removeBooked(i);
+		}
+	}
+
+	public void removeBooked(int seat) {
+		if (bookedTickets.containsKey(seat)) {
+			bookedTickets.remove(seat);
 		}
 	}
 }

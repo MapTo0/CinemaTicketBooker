@@ -66,4 +66,16 @@ public class BookTicketManager {
 			}
 		}
 	}
+
+	@POST
+	@Path("/bookedTickets")
+	public List<Integer> getBookedTickets(
+			@QueryParam(value = "projectionId") String projectionId) {
+		ProjectionBookings projection = map.get(Long.valueOf(projectionId));
+		if (projection == null) {
+			return null;
+		} else {
+			return projection.getBookedPlacesArray();
+		}
+	}
 }
