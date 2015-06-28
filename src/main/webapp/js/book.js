@@ -45,7 +45,7 @@ $(document).ready(function() {
             console.log(seatId);
 
             $.ajax({
-                url: 'rest/book?projectionId=' + $('#projection-select').find(":selected").attr('data-projectionid') + '&seat=' + seatId,
+                url: 'rest/booking/book?projectionId=' + $('#projection-select').find(":selected").attr('data-projectionid') + '&seat=' + seatId,
                 type: "POST",
                 statusCode: {
                     401: function() {

@@ -19,6 +19,7 @@ import cinema.model.Projection;
 import cinema.model.ProjectionBookings;
 
 @Singleton
+@Path("booking")
 public class BookTicketManager {
 	private static final Object lock = new Object();
 	private static final Runnable removerThread = new Runnable() {
