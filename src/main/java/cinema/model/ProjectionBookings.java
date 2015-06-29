@@ -1,15 +1,12 @@
 package cinema.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class ProjectionBookings {
-	// default is 10 minutes
-	private static int RESERVE_TIME_IN_MILISECONDS = 1000 * 60 * 10;
 
 	private final Map<Integer, Ticket> bookedTickets;
 	private final Projection projection;
@@ -19,21 +16,6 @@ public class ProjectionBookings {
 		this.projection = projection;
 	}
 
-	public static void setReserveTime(int minutes) {
-		RESERVE_TIME_IN_MILISECONDS = minutes * 60 * 1000;
-	}
-
-	public void removeExpiredBookings() {
-		for (Entry<Integer, Ticket> entry : bookedTickets.entrySet()) {
-			Date expireDate = new Date(entry.getValue().getTimestamp()
-					.getTime()
-					+ RESERVE_TIME_IN_MILISECONDS);
-			if (new Date().after(expireDate)) {
-				bookedTickets.remove(entry.getKey());
-			}
-		}
-	}
-
 	public List<Integer> getBookedPlacesArray() {
 		List<Integer> bookedPlaces = new ArrayList<>();
 		for (Entry<Integer, Ticket> entry : bookedTickets.entrySet()) {
@@ -41,6 +23,10 @@ public class ProjectionBookings {
 		}
 
 		return bookedPlaces;
+	}
+
+	public Ticket getTicket(Integer place) {
+		return bookedTickets.get(place);
 	}
 
 	public boolean checkUserBookedTicket(int seat, User user) {
@@ -63,9 +49,6 @@ public class ProjectionBookings {
 		Ticket ticket = new Ticket(this.projection, user, seat);
 		bookedTickets.put(seat, ticket);
 		for (Entry<Integer, Ticket> entry : bookedTickets.entrySet()) {
-			System.out.println("The ticket is going to expire at "
-					+ new Date(entry.getValue().getTimestamp().getTime()
-							+ RESERVE_TIME_IN_MILISECONDS));
 		}
 	}
 

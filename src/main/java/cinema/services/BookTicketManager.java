@@ -2,10 +2,13 @@ package cinema.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,6 +17,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import cinema.dao.ProjectionDAO;
@@ -24,17 +28,48 @@ import cinema.model.Ticket;
 @Singleton
 @Path("booking")
 public class BookTicketManager {
+	private static int RESERVE_TIME_IN_MILISECONDS = 1000 * 60 * 10;
+	private static final int WAIT_TIME_NO_TICKETS = 1000 * 5;
 	private static final Object lock = new Object();
-	private static final Runnable removerThread = new Runnable() {
+	private static final Runnable thread = new Runnable() {
 		@Override
-		public void run() {
+		public synchronized void run() {
 			while (true) {
-				for (Entry<Long, ProjectionBookings> entry : map.entrySet()) {
-					entry.getValue().removeExpiredBookings();
+				if (ticketExpirationTimes.isEmpty()) {
+					try {
+						wait(WAIT_TIME_NO_TICKETS); // waits until it is time
+													// for next
+						// ticket to be removed
+					} catch (InterruptedException e) {
+						java.lang.System.out
+								.println("THERE HAS BEEN A PROBLEM");
+					}
+				} else {
+					while (!ticketExpirationTimes.isEmpty()) {
+						Date expiration = new Date(ticketExpirationTimes.peek()
+								.getTimestamp().getTime()
+								+ RESERVE_TIME_IN_MILISECONDS);
+						if (expiration.before(new Date())) {
+							Ticket ticket = ticketExpirationTimes.peek();
+							map.get(ticket.getProjection().getId())
+									.removeBooked(ticket.getSeat());
+							ticketExpirationTimes.poll();
+						} else {
+							try {
+								wait(expiration.getTime()
+										- new Date().getTime() + 50);
+							} catch (InterruptedException e) {
+								java.lang.System.out.println("INTERRUPTED");
+							}
+						}
+
+					}
 				}
 			}
 		}
 	};
+
+	private static final Queue<Ticket> ticketExpirationTimes = new LinkedBlockingQueue<>();
 
 	private static boolean isInitialized = false;
 	private static Map<Long, ProjectionBookings> map = new HashMap<>();
@@ -62,7 +97,7 @@ public class BookTicketManager {
 		if (!isInitialized) {
 			map = init();
 			isInitialized = true;
-			new Thread(removerThread).start();
+			new Thread(thread).start();
 		}
 		synchronized (lock) {
 			Long projectionId = Long.valueOf(projectionIdString);
@@ -83,6 +118,9 @@ public class BookTicketManager {
 								context.getCurrentUser());
 						addedSeats.add(Integer.valueOf(seat));
 					}
+				}
+				for (Integer i : addedSeats) {
+					ticketExpirationTimes.add(projection.getTicket(i));
 				}
 				return Response.ok().build();
 			} else {
@@ -106,15 +144,15 @@ public class BookTicketManager {
 
 	@GET
 	@Path("/userBookedTickets")
-	@Produces("application/json")
-	public List<Ticket> getUserBookedTickets(
-			@QueryParam(value = "userEmail") String userEmail) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getUserBookedTickets(
+			@QueryParam(value = "email") String userEmail) {
 		List<Ticket> userTickets = new ArrayList<>();
 		for (Entry<Long, ProjectionBookings> entry : map.entrySet()) {
 			userTickets
 					.addAll(entry.getValue().getUserBookedTickets(userEmail));
 		}
 
-		return userTickets;
+		return userTickets.toString();
 	}
 }
