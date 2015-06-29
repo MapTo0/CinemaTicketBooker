@@ -15,18 +15,44 @@ $(document).ready(function() {
                 async: true,
                 complete: function(data) {
                     var bookedTickets = JSON.parse(data.responseText);
-                    for (var i = 0; i<bookedTickets.length; i++) {
-                        $List.append('<li class="booking-items">' +
-                                '<input type="checkbox">' +
-                                '<span>'+ bookedTickets[i].movieTitle + ' в ' + bookedTickets[i].startTime + ' място: ' + (parseInt(bookedTickets[i].seat)+1) + '</span>' +
-                                '<span class="payed">Резервиран</span>' +
-                                '</li>');
+                    for (var i = 0; i < bookedTickets.length; i++) {
+                        $List.append('<li class="booking-items" ' + 'data-ticket-type="' + 'ordered' + '"' + '>' +
+                            '<input type="checkbox">' +
+                            '<span>' + bookedTickets[i].movieTitle + ' в ' + bookedTickets[i].startTime + ' място: ' + (parseInt(bookedTickets[i].seat) + 1) + '</span>' +
+                            '<span class="payed">Резервиран</span>' +
+                            '</li>');
                     }
+                    $.ajax({
+                        type: "GET",
+                        url: "rest/viewtickets/user?email=" + userEmail,
+                        async: true,
+                        complete: function(data) {
+                            var bookedTickets = JSON.parse(data.responseText);
+                            for (var i = 0; i < bookedTickets.length; i++) {
+                                $List.append('<li class="booking-items" ' + 'data-ticket-type="' + 'bought' + '"' + '>' +
+                                    '<input type="checkbox">' +
+                                    '<span>' + bookedTickets[i].movieTitle + ' в ' + bookedTickets[i].startTime + ' място: ' + (parseInt(bookedTickets[i].seat) + 1) + '</span>' +
+                                    '<span class="payed">Платен</span>' +
+                                    '</li>');
+                            }
+                        }
+                    });
                 }
             });
         }
     });
 
+    $('#buy-ticket-button').click(function() {
+
+        $.ajax({
+            type: "POST",
+            url: "rest/projection/buy?projectionId=" + userEmail,
+            async: true,
+            complete: function() {
+                alert("Благодаря, че закупихте този билет!")
+            }
+        });
+    });
 
     function DO_NOT_EVER_WRITE_SUCH_CODE(string, position) {
         return string.responseText.split(',')[position].split(':')[1].slice(1, (string.responseText.split(',')[0].split(':')[1].length));
