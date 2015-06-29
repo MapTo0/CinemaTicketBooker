@@ -17,7 +17,7 @@ $(document).ready(function() {
                     var bookedTickets = JSON.parse(data.responseText);
                     for (var i = 0; i < bookedTickets.length; i++) {
                         $List.append('<li class="booking-items" ' + 'data-ticket-type="' + 'ordered' + '"' + '>' +
-                            '<input type="checkbox">' +
+                            '<input type="checkbox"' + 'data-projection-id="' + bookedTickets[i].projectionId + '" ' + 'data-seat="' + bookedTickets[i].seat + '"' + '>' +
                             '<span>' + bookedTickets[i].movieTitle + ' в ' + bookedTickets[i].startTime + ' място: ' + (parseInt(bookedTickets[i].seat) + 1) + '</span>' +
                             '<span class="payed">Резервиран</span>' +
                             '</li>');
@@ -44,13 +44,17 @@ $(document).ready(function() {
 
     $('#buy-ticket-button').click(function() {
 
-        $.ajax({
-            type: "POST",
-            url: "rest/projection/buy?projectionId=" + userEmail,
-            async: true,
-            complete: function() {
-                alert("Благодаря, че закупихте този билет!")
-            }
+        $('#booking-list input:checked').each(function() {
+            var projectionId = $(this).attr('data-projection-id');
+            var seat = $(this).attr('data-seat');
+            $.ajax({
+                type: "POST",
+                url: "rest/projection/buy?projectionId=" + projectionId +"&seat=" + seat,
+                async: true,
+                complete: function() {
+                    alert("Благодаря, че закупихте този билет!")
+                }
+            });
         });
     });
 
