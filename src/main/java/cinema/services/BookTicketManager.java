@@ -144,8 +144,8 @@ public class BookTicketManager {
 
 	@GET
 	@Path("/userBookedTickets")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getUserBookedTickets(
+	@Produces("application/json")
+	public Collection<Ticket> getUserBookedTickets(
 			@QueryParam(value = "email") String userEmail) {
 		List<Ticket> userTickets = new ArrayList<>();
 		for (Entry<Long, ProjectionBookings> entry : map.entrySet()) {
@@ -153,6 +153,6 @@ public class BookTicketManager {
 					.addAll(entry.getValue().getUserBookedTickets(userEmail));
 		}
 
-		return userTickets.toString();
+		return userTickets;
 	}
 }

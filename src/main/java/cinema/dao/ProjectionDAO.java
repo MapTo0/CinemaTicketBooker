@@ -32,7 +32,7 @@ public class ProjectionDAO {
 
 	public Projection findByMovieTitle(String movieTitle) {
 		TypedQuery<Projection> query = em.createNamedQuery(
-				"findByAuthorAndTitle", Projection.class).setParameter(
+				"findByMovieTitle", Projection.class).setParameter(
 				"movieTitle", movieTitle);
 		try {
 			return query.getSingleResult();

@@ -16,7 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-@NamedQueries({@NamedQuery(name = "getAllProjections", query = "SELECT b FROM Projection b")})
+@NamedQueries({@NamedQuery(name = "getAllProjections", query = "SELECT p FROM Projection p"),
+	@NamedQuery(name = "findByMovieTitle", query = "SELECT p FROM Projection p WHERE p.movieTitle=:movieTitle")})
 public class Projection implements Serializable {
 
     private static final long serialVersionUID = -2929008106626811914L;
