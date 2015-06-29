@@ -97,8 +97,8 @@ public class Ticket implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Ticket [movieTitle=" + projection.getMovieTitle() + ", startTime=" + projection.getStartTime() + ", ownerEmail=" + owner.getEmail()
-				+ ", seat=" + seat + "]";
+		return "{\"movieTitle\" : " + "\"" +projection.getMovieTitle() + "\"" + ", \"startTime\" : " + "\"" + projection.getStartTime() + "\""+ ", \"ownerEmail\" : " + "\"" + owner.getEmail() + "\""
+				+ ", \"seat\" : " + "\"" + seat + "\""+ "}";
 	}
 
 }
