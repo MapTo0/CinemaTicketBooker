@@ -14,12 +14,14 @@ $(document).ready(function() {
                 url: "rest/booking/userBookedTickets?email=" + userEmail,
                 async: true,
                 complete: function(data) {
-                    console.log(data);
-                    $List.append('<li class="booking-items">' +
-                        '<input type="checkbox">' +
-                        '<span>Ticket utre v 12 chasa v Plaza na Galena baby</span>' +
-                        '<span class="payed">Платен</span>' +
-                        '</li>');
+                    var bookedTickets = JSON.parse(data.responseText);
+                    for (var i = 0; i<bookedTickets.length; i++) {
+                        $List.append('<li class="booking-items">' +
+                                '<input type="checkbox">' +
+                                '<span>'+ bookedTickets[i].movieTitle + ' в ' + bookedTickets[i].startTime + ' място: ' + (parseInt(bookedTickets[i].seat)+1) + '</span>' +
+                                '<span class="payed">Резервиран</span>' +
+                                '</li>');
+                    }
                 }
             });
         }
@@ -27,7 +29,7 @@ $(document).ready(function() {
 
 
     function DO_NOT_EVER_WRITE_SUCH_CODE(string, position) {
-        return string.split(',')[position].split(':')[1].slice(1, (string.split(',')[0].split(':')[1].length));
+        return string.responseText.split(',')[position].split(':')[1].slice(1, (string.responseText.split(',')[0].split(':')[1].length));
     }
 
 });
