@@ -71,7 +71,7 @@ public class BookTicketManager {
 		}
 	};
 
-	private static final Thread deleterThread = new Thread(thread);
+	private static Thread deleterThread = new Thread(thread);
 	private static final Queue<Ticket> ticketExpirationTimes = new LinkedBlockingQueue<>();
 
 	private static boolean isInitialized = false;
@@ -106,6 +106,7 @@ public class BookTicketManager {
 			}
 		}
 
+		deleterThread = new Thread(thread);
 		deleterThread.start();
 	}
 
