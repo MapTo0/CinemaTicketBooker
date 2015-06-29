@@ -49,7 +49,7 @@ $(document).ready(function() {
             var seat = $(this).attr('data-seat');
             $.ajax({
                 type: "POST",
-                url: "rest/projection/buy?projectionId=" + projectionId +"&seat=" + seat,
+                url: "rest/projection/buy?projectionId=" + projectionId + "&place=" + seat,
                 async: true,
                 complete: function() {
                     alert("Благодаря, че закупихте този билет!")
