@@ -83,6 +83,6 @@ $(document).ready(function() {
             alert('Моля проверете отново данните, които сте въвели!');
             return false;
         }
-        return true
+        return true;
     }
 });

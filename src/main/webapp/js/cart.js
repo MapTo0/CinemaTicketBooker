@@ -11,10 +11,15 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "GET",
-                url: "rest/booking/userBookedTickets?userEmail=" + userEmail,
+                url: "rest/viewtickets/user?mail=" + userEmail,
                 async: true,
                 success: function(data) {
                     console.log(data);
+                    $List.append('<li class="booking-items">' +
+                        '<input type="checkbox">' +
+                        '<span>Ticket utre v 12 chasa v Plaza na Galena baby</span>' +
+                        '<span class="payed">Платен</span>' +
+                        '</li>');
                 }
             });
         }
@@ -29,9 +34,9 @@ $(document).ready(function() {
 
 
 // done: function() {
-//     $List.append('<li class="booking-items">' +
-//         '<input type="checkbox">' +
-//         '<span>Ticket utre v 12 chasa v Plaza na Galena baby</span>' +
-//         '<span class="payed">Платен</span>' +
-//         '</li>');
+// $List.append('<li class="booking-items">' +
+//     '<input type="checkbox">' +
+//     '<span>Ticket utre v 12 chasa v Plaza na Galena baby</span>' +
+//     '<span class="payed">Платен</span>' +
+//     '</li>');
 // });
