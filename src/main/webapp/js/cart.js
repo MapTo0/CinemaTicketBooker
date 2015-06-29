@@ -11,7 +11,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "GET",
-                url: "rest/userBookedTickets?userEmail=" + userEmail,
+                url: "rest/booking/userBookedTickets?userEmail=" + userEmail,
                 async: true,
                 success: function(data) {
                     console.log(data);

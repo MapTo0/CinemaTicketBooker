@@ -29,12 +29,16 @@ $(document).ready(function() {
                     });
                 }
             });
-
         });
 
         $BookingBtn.click(function() {
             var seatsForBooking = $('#seats > .booked'),
                 seatId = "";
+
+            if (seatsForBooking.length === 0) {
+                alert("Моля маркирайте местата, които искате да запазите!");
+                return;
+            }
             $.each(seatsForBooking, function(el) {
                 seatId += $(seatsForBooking[el]).attr('data-seatid');
                 el === (seatsForBooking.length - 1) ? "" : seatId += ",";
@@ -52,7 +56,7 @@ $(document).ready(function() {
                     }
                 }
             });
-        })
+        });
 
         function fillSeats(aData) {
             for (var i = 0; i < aData.length; i++) {
