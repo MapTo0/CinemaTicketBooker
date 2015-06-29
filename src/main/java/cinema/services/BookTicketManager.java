@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -70,6 +71,7 @@ public class BookTicketManager {
 		}
 	};
 
+	private static final Thread deleterThread = new Thread(thread);
 	private static final Queue<Ticket> ticketExpirationTimes = new LinkedBlockingQueue<>();
 
 	private static boolean isInitialized = false;
@@ -90,6 +92,23 @@ public class BookTicketManager {
 		return map;
 	}
 
+	public void removeBookedTicket(String projectionId, Integer place) {
+		deleterThread.interrupt();
+		Iterator<Ticket> iterator = ticketExpirationTimes.iterator();
+		while (iterator.hasNext()) {
+			Ticket ticket = iterator.next();
+			if (ticket.getProjection().getId()
+					.equals(Long.parseLong(projectionId))) {
+				if (ticket.getSeat() == place) {
+					ticketExpirationTimes.remove(ticket);
+					break;
+				}
+			}
+		}
+
+		deleterThread.start();
+	}
+
 	@POST
 	@Path("/book")
 	public Response bookTicket(
@@ -98,7 +117,7 @@ public class BookTicketManager {
 		if (!isInitialized) {
 			map = init();
 			isInitialized = true;
-			new Thread(thread).start();
+			deleterThread.start();
 		}
 		synchronized (lock) {
 			Long projectionId = Long.valueOf(projectionIdString);

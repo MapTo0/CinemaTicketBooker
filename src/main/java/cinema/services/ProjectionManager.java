@@ -26,6 +26,9 @@ public class ProjectionManager {
 	@Inject
 	private UserContext userContext;
 
+	@Inject
+	private BookTicketManager bookTicketManager;
+
 	@GET
 	@Produces("application/json")
 	public Collection<Projection> getAllProjections() {
@@ -49,7 +52,11 @@ public class ProjectionManager {
 		String[] finalPlace = place.split(",");
 		if (projection != null) {
 			for (String p : finalPlace) {
-				Ticket ticket = new Ticket(projection,userContext.getCurrentUser(), Integer.valueOf(p));projectionDAO.buyTicket(ticket);
+				bookTicketManager.removeBookedTicket(projectionId,
+						Integer.valueOf(p));
+				Ticket ticket = new Ticket(projection,
+						userContext.getCurrentUser(), Integer.valueOf(p));
+				projectionDAO.buyTicket(ticket);
 			}
 		}
 
