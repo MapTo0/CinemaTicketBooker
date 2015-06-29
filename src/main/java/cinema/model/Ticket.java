@@ -97,7 +97,7 @@ public class Ticket implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Ticket [projection=" + projection + ", owner=" + owner
+		return "Ticket [movieTitle=" + projection.getMovieTitle() + ", startTime=" + projection.getStartTime() + ", ownerEmail=" + owner.getEmail()
 				+ ", seat=" + seat + "]";
 	}
 

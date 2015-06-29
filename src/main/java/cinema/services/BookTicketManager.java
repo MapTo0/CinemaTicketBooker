@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.inject.Inject;
@@ -145,14 +147,14 @@ public class BookTicketManager {
 	@GET
 	@Path("/userBookedTickets")
 	@Produces("application/json")
-	public Collection<Ticket> getUserBookedTickets(
+	public String getUserBookedTickets(
 			@QueryParam(value = "email") String userEmail) {
-		List<Ticket> userTickets = new ArrayList<>();
+		Set<Ticket> userTickets = new HashSet<>();
 		for (Entry<Long, ProjectionBookings> entry : map.entrySet()) {
 			userTickets
 					.addAll(entry.getValue().getUserBookedTickets(userEmail));
 		}
 
-		return userTickets;
+		return userTickets.toString();
 	}
 }
