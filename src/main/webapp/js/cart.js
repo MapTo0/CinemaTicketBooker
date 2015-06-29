@@ -6,14 +6,14 @@ $(document).ready(function() {
         url: "rest/user/current",
         async: true,
         dataType: "text",
-        success: function(userObject) {
+        complete: function(userObject) {
             var userEmail = DO_NOT_EVER_WRITE_SUCH_CODE(userObject, 0);
 
             $.ajax({
                 type: "GET",
-                url: "rest/viewtickets/user?mail=" + userEmail,
+                url: "rest/booking/userBookedTickets?email=" + userEmail,
                 async: true,
-                success: function(data) {
+                complete: function(data) {
                     console.log(data);
                     $List.append('<li class="booking-items">' +
                         '<input type="checkbox">' +
@@ -31,12 +31,3 @@ $(document).ready(function() {
     }
 
 });
-
-
-// done: function() {
-// $List.append('<li class="booking-items">' +
-//     '<input type="checkbox">' +
-//     '<span>Ticket utre v 12 chasa v Plaza na Galena baby</span>' +
-//     '<span class="payed">Платен</span>' +
-//     '</li>');
-// });
