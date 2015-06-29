@@ -28,10 +28,10 @@ public class CashierViewAllTickets {
 	@GET
 	@Path("/user")
 	@Produces("application/json")
-	public Collection<Ticket> getBoughtTicketsByUser(@QueryParam("email") String email) {
+	public String getBoughtTicketsByUser(@QueryParam("email") String email) {
 		User user = userDAO.findUserByName(email);
 		if(user != null){
-			return user.getCurrentTickets();
+			return user.getCurrentTickets().toString();
 		}
 		return null;
 	}
