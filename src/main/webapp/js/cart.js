@@ -1,3 +1,20 @@
+(function() {
+    $.ajax({
+        url: 'rest/user/current',
+        type: "GET",
+        complete: function(data) {
+            if (DO_NOT_EVER_WRITE_SUCH_CODE(data, 2) === "true") {
+                window.location.replace("admin.html");
+            } else {
+                return;
+            }
+        }
+    });
+})();
+
+function DO_NOT_EVER_WRITE_SUCH_CODE(string, position) {
+    return string.responseText.split(',')[position].split(':')[1].slice(1, (string.responseText.split(',')[position].split(':')[1].length));
+}
 $(document).ready(function() {
     var $List = $('#booking-list');
 
@@ -45,8 +62,10 @@ $(document).ready(function() {
     $('#buy-ticket-button').click(function() {
 
         $('#booking-list input:checked').each(function() {
+
             var projectionId = $(this).attr('data-projection-id');
             var seat = $(this).attr('data-seat');
+
             $.ajax({
                 type: "POST",
                 url: "rest/projection/buy?projectionId=" + projectionId + "&place=" + seat,
@@ -58,8 +77,21 @@ $(document).ready(function() {
         });
     });
 
-    function DO_NOT_EVER_WRITE_SUCH_CODE(string, position) {
-        return string.responseText.split(',')[position].split(':')[1].slice(1, (string.responseText.split(',')[0].split(':')[1].length));
-    }
+    $('#logout-button').click(function() {
+        $.ajax({
+            url: 'rest/user/logout',
+            type: "GET",
+            statusCode: {
+                204: function() {
+                    alert("Успешно излизане от системата!");
+                    window.location.replace("index.html");
+                }
+            }
+        });
+    });
+
+    $('#shopping-cart-button').click(function() {
+        window.location.replace("shopping-cart.html");
+    });
 
 });

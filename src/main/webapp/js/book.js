@@ -1,3 +1,22 @@
+(function() {
+    $.ajax({
+        url: 'rest/user/current',
+        type: "GET",
+        complete: function(data) {
+            if (DO_NOT_EVER_WRITE_SUCH_CODE(data, 2) === "true") {
+                window.location.replace("admin.html");
+            } else {
+                return;
+            }
+        }
+    });
+
+    function DO_NOT_EVER_WRITE_SUCH_CODE(string, position) {
+        return string.responseText.split(',')[position].split(':')[1].slice(1, (string.responseText.split(',')[position].split(':')[1].length));
+    }
+})();
+
+
 $(document).ready(function() {
     var $Seats = $("#seats"),
         $Projections = $("#projection-select"),
