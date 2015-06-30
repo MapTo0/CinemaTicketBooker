@@ -1,6 +1,8 @@
 package cinema.dao;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -47,7 +49,16 @@ public class ProjectionDAO {
 		int freePlaces = foundProjection.getFreePlaces() - 1;
 		foundProjection.getPlaces().add(ticket.getSeat(), false);
 		foundProjection.setFreePlaces(freePlaces);
-		ticket.getOwner().getCurrentTickets().add(ticket);
+		System.out.println(ticket.getOwner());
+		System.out.println(ticket.getOwner().getCurrentTickets());
+		Set<Ticket> curTickets = new HashSet<Ticket>();
+		curTickets.add(ticket);
+		System.out.println(curTickets);
+		//ticket.getOwner().getCurrentTickets().add(ticket);
+		//ticket.getOwner().setCurrentTickets(ticket.getOwner().getCurrentTickets().add(e));
+		ticket.getOwner().setCurrentTickets(curTickets);
+		em.flush();
+		
 	}
 
 }

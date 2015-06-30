@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -41,7 +43,7 @@ public class User implements Serializable {
 	private boolean isCashier;
 
 	@OneToMany(fetch = FetchType.EAGER)
-	private Set<Ticket> currentTickets;
+	private Set<Ticket> currentTickets = new HashSet<Ticket>();
 
 	public User() {
 	}
@@ -53,7 +55,6 @@ public class User implements Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.isCashier = isCashier;
-		this.currentTickets = new HashSet<Ticket>();
 	}
 
 	public Long getId() {

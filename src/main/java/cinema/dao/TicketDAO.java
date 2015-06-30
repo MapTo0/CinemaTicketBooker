@@ -36,10 +36,18 @@ public class TicketDAO {
 	public Collection<Ticket> findByMovieTitle(String movieTitle) {
 		Projection projection = projectionDAO.findByMovieTitle(movieTitle);
 		TypedQuery<Ticket> query = em.createNamedQuery(
-				"findTicketByMovieTitle", Ticket.class).setParameter(
+				"findTicketByProjection", Ticket.class).setParameter(
 				"projection", projection);
 		return query.getResultList();
 
+	}
+	
+	public Collection<Ticket> findByProjectionId(String projectionId){
+		Projection projection = projectionDAO.findById(Long.parseLong(projectionId));
+		TypedQuery<Ticket> query = em.createNamedQuery(
+				"findTicketByProjection", Ticket.class).setParameter(
+				"projection", projection);
+		return query.getResultList();
 	}
 
 }

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "TICKETS")
 @NamedQueries({
 		@NamedQuery(name = "getAllTickets", query = "SELECT t FROM Ticket t"),
-		@NamedQuery(name = "findTicketByMovieTitle", query = "SELECT t FROM Ticket t WHERE t.projection = :projection") })
+		@NamedQuery(name = "findTicketByProjection", query = "SELECT t FROM Ticket t WHERE t.projection = :projection") })
 public class Ticket implements Serializable {
 
 	private static final long serialVersionUID = -473800766770173540L;

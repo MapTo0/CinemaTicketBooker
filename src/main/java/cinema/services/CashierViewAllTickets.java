@@ -35,7 +35,11 @@ public class CashierViewAllTickets {
 		if(user != null){
 			System.out.println("here");
 			System.out.println(user.getFirstName());
-			
+			if(user.getCurrentTickets() == null){
+				System.out.println("set-a e null");
+			} else {
+				System.out.println("size : " + user.getCurrentTickets().size());
+			}
 			return user.getCurrentTickets().toString();
 		}
 		return null;
@@ -43,7 +47,7 @@ public class CashierViewAllTickets {
 	
 	@GET
 	@Path("/projection")
-	public Collection<Ticket> getBoughtTicketsForProjection(@QueryParam("movieTitle") String movieTitle){
-		return ticketDAO.findByMovieTitle(movieTitle);
+	public Collection<Ticket> getBoughtTicketsForProjection(@QueryParam("projectionId") String projectionId){
+		return ticketDAO.findByProjectionId(projectionId);
 	}
 }
