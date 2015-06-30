@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import cinema.model.User;
 import cinema.services.UserContext;
 
-@WebFilter({"/rest/projection/*"})
+@WebFilter({"/rest/projection/*", "/rest/bookig/*", "/rest/viewtickets/*"})
 public class ProtectedBuyFilter implements Filter {
 
 	@Inject
