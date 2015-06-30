@@ -329,3 +329,7 @@ ul {
 .search-divs > button {
     width: 50%;
 }
+
+.search-divs > select {
+    width: 100% !important;
+}
