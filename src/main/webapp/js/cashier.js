@@ -55,7 +55,7 @@ $(document).ready(function() {
                 for (var i = 0; i < bookedTickets.length; i++) {
                     $List.append('<li class="booking-items" ' + 'data-ticket-type="' + 'ordered' + '"' + '>' +
                         '<input type="checkbox"' + 'data-projection-id="' + bookedTickets[i].projectionId + '" ' + 'data-seat="' + bookedTickets[i].seat + '"' + '>' +
-                        '<span> Потрбител: ' + $('#user-email').val() + bookedTickets[i].movieTitle + ' в ' + bookedTickets[i].startTime + ' място: ' + (parseInt(bookedTickets[i].seat) + 1) + '</span>' +
+                        '<span> Потрбител: ' + $('#user-email').val() + ' Прожекция: ' + bookedTickets[i].movieTitle + ' в ' + bookedTickets[i].startTime + ' място: ' + (parseInt(bookedTickets[i].seat) + 1) + '</span>' +
                         '<span class="payed">Резервиран</span>' +
                         '</li>');
                 }
