@@ -13,6 +13,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import cinema.dao.ProjectionDAO;
+import cinema.dao.TicketDAO;
 import cinema.model.Projection;
 import cinema.model.Ticket;
 
@@ -28,6 +29,9 @@ public class ProjectionManager {
 
 	@Inject
 	private BookTicketManager bookTicketManager;
+	
+	@Inject
+	private TicketDAO ticketDAO;
 
 	@GET
 	@Produces("application/json")

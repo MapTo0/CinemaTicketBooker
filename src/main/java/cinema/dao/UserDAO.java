@@ -4,6 +4,8 @@ import java.security.MessageDigest;
 import java.util.Collection;
 
 import javax.ejb.Singleton;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -31,6 +33,17 @@ public class UserDAO {
 		
 		return isOk;
 	}
+	
+	public static boolean isValidEmailAddress(String email) {
+		   boolean result = true;
+		   try {
+		      InternetAddress emailAddr = new InternetAddress(email);
+		      emailAddr.validate();
+		   } catch (AddressException ex) {
+		      result = false;
+		   }
+		   return result;
+		}
 
 	public boolean validateUserCredentials(String email, String password) {
 		String txtQuery = "SELECT u FROM User u WHERE u.email=:email AND u.password=:password";

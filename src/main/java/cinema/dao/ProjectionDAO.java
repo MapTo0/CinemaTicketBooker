@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -18,6 +19,9 @@ public class ProjectionDAO {
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	@Inject
+	private TicketDAO ticketDAO;
 
 	public void addProjection(Projection projection) {
 		em.persist(projection);
@@ -57,7 +61,6 @@ public class ProjectionDAO {
 		//ticket.getOwner().getCurrentTickets().add(ticket);
 		//ticket.getOwner().setCurrentTickets(ticket.getOwner().getCurrentTickets().add(e));
 		ticket.getOwner().setCurrentTickets(curTickets);
-		em.flush();
 		
 	}
 
