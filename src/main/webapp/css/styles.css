@@ -333,3 +333,7 @@ ul {
 .search-divs > select {
     width: 100% !important;
 }
+
+#user-email {
+    padding-left: 10px;
+}
