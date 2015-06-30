@@ -48,7 +48,6 @@ public class UserDAO {
 	public boolean validateUserCredentials(String email, String password) {
 		String txtQuery = "SELECT u FROM User u WHERE u.email=:email AND u.password=:password";
 		TypedQuery<User> query = em.createQuery(txtQuery, User.class);
-		System.out.println(email + " " + password);
 		query.setParameter("email", email);
 		query.setParameter("password", getHashedPassword(password));
 		return queryUser(query) != null;

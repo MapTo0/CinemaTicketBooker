@@ -32,10 +32,7 @@ public class UserManager {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response registerUser(User newUser) {
 		if(newUser.getFirstName().length() > 0 && newUser.getFirstName().length() < 20 && newUser.getLastName().length() > 0 && newUser.getLastName().length() < 20){
-			System.out.println("in the club");
-			System.out.println(newUser.getPassword());
 			if(newUser.getPassword().length() >= 8){
-				System.out.println(newUser.getPassword());
 				if (userDAO.addUser(newUser)) {
 					return RESPONSE_OK;
 				}

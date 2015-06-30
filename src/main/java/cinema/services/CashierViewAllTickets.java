@@ -30,16 +30,7 @@ public class CashierViewAllTickets {
 	@Produces("application/json")
 	public String getBoughtTicketsByUser(@QueryParam("email") String email) {
 		User user = userDAO.findUserByName(email);
-		System.out.println(email);
-		System.out.println("no e tyk");
 		if(user != null){
-			System.out.println("here");
-			System.out.println(user.getFirstName());
-			if(user.getCurrentTickets() == null){
-				System.out.println("set-a e null");
-			} else {
-				System.out.println("size : " + user.getCurrentTickets().size());
-			}
 			return user.getCurrentTickets().toString();
 		}
 		return null;
